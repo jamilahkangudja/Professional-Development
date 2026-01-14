@@ -2,164 +2,338 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>First in Business | GA Top 10 Screener</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First in Business GA Screener</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF.js library for local-only browser-side parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <style>
-        .candidate-card { transition: transform 0.2s; }
-        .candidate-card:hover { transform: translateY(-2px); }
-        .top-10-border { border: 2px solid #6366f1; position: relative; }
-        .rank-badge { position: absolute; top: -10px; left: -10px; background: #6366f1; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        .top-match-border {
+            border: 2px solid #6366f1;
+            background: linear-gradient(to right, #ffffff, #f5f3ff);
+        }
+        .rank-indicator {
+            background: #6366f1;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        @media print {
+            .no-print { display: none; }
+        }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen pb-20">
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
 
-    <nav class="bg-indigo-900 text-white p-6 shadow-xl mb-8">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold italic">First in Business</h1>
-                <p class="text-indigo-200 text-sm">GA Application Processing Portal (FERPA Secure)</p>
+    <!-- Navigation -->
+    <nav class="bg-indigo-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-1.5 rounded-lg">
+                    <svg class="w-6 h-6 text-indigo-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight">First in Business | <span class="font-light text-indigo-200">GA Selection Portal</span></h1>
             </div>
-            <div class="text-right">
-                <p class="text-xs uppercase tracking-widest opacity-70">Requirement Filter</p>
-                <p class="font-mono text-emerald-400">Master's Degree Enforced</p>
+            <div class="text-sm font-medium bg-indigo-800 px-3 py-1 rounded-full border border-indigo-700">
+                Privacy: Local PDF Processing (FERPA Safe)
             </div>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6">
-        <div id="uploadArea" class="bg-white border-4 border-dashed border-gray-200 rounded-3xl p-12 text-center mb-10 transition-colors hover:border-indigo-300">
-            <input type="file" id="pdfUpload" class="hidden" accept="application/pdf">
-            <label for="pdfUpload" class="cursor-pointer">
-                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+    <main class="max-w-7xl mx-auto p-6">
+        <!-- Dashboard Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass-card p-4 rounded-xl shadow-sm">
+                <h3 class="text-slate-500 text-xs font-bold uppercase tracking-wider">Total in PDF</h3>
+                <p id="totalCount" class="text-2xl font-black text-slate-700">0</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h3 class="text-slate-500 text-xs font-bold uppercase tracking-wider">Grad Qualified</h3>
+                <p id="gradCount" class="text-2xl font-black text-indigo-600">0</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl shadow-sm border-l-4 border-emerald-500">
+                <h3 class="text-slate-500 text-xs font-bold uppercase tracking-wider">Top Tier (80+)</h3>
+                <p id="highPotCount" class="text-2xl font-black text-emerald-600">0</p>
+            </div>
+            <div class="bg-indigo-600 p-4 rounded-xl shadow-lg text-white flex items-center justify-between cursor-pointer hover:bg-indigo-700 transition-colors" onclick="document.getElementById('pdfInput').click()">
+                <div>
+                    <h3 class="text-indigo-100 text-xs font-bold uppercase tracking-wider">Upload Master PDF</h3>
+                    <p class="text-sm font-medium">Process 121 Applications</p>
                 </div>
-                <h2 class="text-xl font-semibold text-gray-700">Upload Master PDF</h2>
-                <p class="text-gray-500 mt-2">Upload the combined PDF of 121 applications.<br>The tool will auto-split and rank the Top 10.</p>
-            </label>
-            <div id="status" class="mt-4 text-indigo-600 font-medium hidden italic">Processing candidates... please wait.</div>
+                <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                <input type="file" id="pdfInput" class="hidden" accept="application/pdf">
+            </div>
         </div>
 
-        <div id="resultsWrapper" class="hidden">
-            <div class="flex justify-between items-end mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Top 10 Recommended Matches</h2>
-                <span id="matchCount" class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold"></span>
+        <div id="loadingOverlay" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[60] flex items-center justify-center text-white">
+            <div class="text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-white border-t-transparent mx-auto mb-4"></div>
+                <p class="text-lg font-bold">Scanning 121 Applications...</p>
+                <p class="text-sm opacity-70">Splitting files and identifying Master's candidates</p>
             </div>
-            
-            <div id="topTenList" class="grid grid-cols-1 gap-4 mb-12">
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Weighted Criteria Info -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <h2 class="text-lg font-bold mb-4 text-indigo-900 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        Ranking Weights
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-bold text-slate-600">LEADERSHIP</span>
+                                <span class="text-xs font-black text-indigo-600">40%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-1.5 rounded-full">
+                                <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 40%"></div>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-2">Officer titles, club involvement, management experience.</p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-bold text-slate-600">EVENT PLANNING</span>
+                                <span class="text-xs font-black text-purple-600">30%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-1.5 rounded-full">
+                                <div class="bg-purple-500 h-1.5 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-2">Logistics, scheduling, catering, and venue coordination.</p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-bold text-slate-600">BUSINESS & SERVICE</span>
+                                <span class="text-xs font-black text-emerald-600">30%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-1.5 rounded-full">
+                                <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-2">Customer service history and business education.</p>
+                        </div>
+                    </div>
                 </div>
 
-            <hr class="my-10 border-gray-200">
-            
-            <h3 class="text-lg font-bold text-gray-500 mb-4 tracking-tight uppercase">Other Qualified Candidates</h3>
-            <div id="othersList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <h3 class="text-sm font-bold text-slate-700 mb-2">Requirement Check</h3>
+                    <div class="flex items-center text-emerald-600 text-sm font-bold mb-4">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        Master's Degree Verification
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Candidates are only processed if their resume includes keywords like: 
+                        <span class="font-mono bg-slate-100 px-1">Master's</span>, 
+                        <span class="font-mono bg-slate-100 px-1">MBA</span>, 
+                        <span class="font-mono bg-slate-100 px-1">Graduate</span>, 
+                        or <span class="font-mono bg-slate-100 px-1">Enrolled In</span>.
+                    </p>
                 </div>
+            </div>
+
+            <!-- Right: Results Queue -->
+            <div class="lg:col-span-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-slate-800">Top 10 Recommendations</h2>
+                    <button onclick="clearAll()" class="text-red-500 text-xs hover:underline">Clear Dashboard</button>
+                </div>
+                
+                <div id="resultsList" class="space-y-4">
+                    <div id="emptyState" class="text-center py-24 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+                        <div class="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-600">Waiting for Master PDF</h3>
+                        <p class="text-sm text-slate-400 max-w-sm mx-auto mt-2">Upload the combined applicant file to automatically rank the top 10 Master's candidates based on your specific weighted pillars.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
     <script>
+        // Setup PDF.js
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-        const pdfUpload = document.getElementById('pdfUpload');
-        const status = document.getElementById('status');
-        
-        pdfUpload.addEventListener('change', async (e) => {
+        let candidates = [];
+        const pdfInput = document.getElementById('pdfInput');
+        const loader = document.getElementById('loadingOverlay');
+
+        pdfInput.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (!file) return;
 
-            status.classList.remove('hidden');
+            loader.classList.remove('hidden');
             const reader = new FileReader();
             
             reader.onload = async function() {
-                const typedarray = new Uint8Array(this.result);
-                const pdf = await pdfjsLib.getDocument(typedarray).promise;
-                let fullText = "";
+                try {
+                    const typedarray = new Uint8Array(this.result);
+                    const pdf = await pdfjsLib.getDocument(typedarray).promise;
+                    let fullText = "";
 
-                for (let i = 1; i <= pdf.numPages; i++) {
-                    const page = await pdf.getPage(i);
-                    const content = await page.getTextContent();
-                    const strings = content.items.map(item => item.str);
-                    fullText += strings.join(" ") + "\n---PAGE_BREAK---\n";
+                    // Extract text from every page
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const content = await page.getTextContent();
+                        const strings = content.items.map(item => item.str);
+                        fullText += strings.join(" ") + " [PAGE_END] ";
+                    }
+
+                    // Split by the recurring employment application header
+                    // This creates chunks of [Resume + Application]
+                    const rawChunks = fullText.split(/On Campus Student Employment Application/gi);
+                    processChunks(rawChunks);
+                } catch (err) {
+                    console.error(err);
+                    alert("Error processing PDF. Ensure it is a valid PDF file.");
+                } finally {
+                    loader.classList.add('hidden');
                 }
-
-                // Split by the specific application header
-                const candidateSections = fullText.split(/On Campus Student Employment Application/i);
-                processCandidates(candidateSections);
             };
             reader.readAsArrayBuffer(file);
         });
 
-        function processCandidates(sections) {
-            let processed = [];
+        function processChunks(chunks) {
+            candidates = [];
+            let totalFound = chunks.length;
 
-            sections.forEach((section, index) => {
-                if (section.trim().length < 100) return;
+            chunks.forEach((text, index) => {
+                if (text.trim().length < 50) return;
 
-                const isMasters = /master|graduate|MBA|M\.S\.|M\.A\./i.test(section);
-                if (!isMasters) return; // FERPA-safe filter: only grad students
+                // 1. Mandatory Grad Filter
+                const isGrad = /master|graduate|MBA|MS|MA|Ph\.D|enrolled/i.test(text);
+                if (!isGrad) return;
 
-                // Keyword Scoring
+                // 2. Pillar Analysis (Keyword Counts)
+                const leadKeywords = ['president', 'vp', 'officer', 'chair', 'lead', 'managed', 'leadership', 'org', 'executive', 'director'];
+                const eventKeywords = ['event', 'planning', 'logistics', 'coordinator', 'catering', 'scheduling', 'venue', 'conference', 'meeting'];
+                const serviceKeywords = ['customer', 'service', 'client', 'retail', 'support', 'hospitality', 'communication', 'business', 'marketing'];
+
                 const scores = {
-                    lead: (section.match(/president|vp|officer|chair|lead|organization|engagement/gi) || []).length * 8,
-                    events: (section.match(/event|planning|logistics|coordinator|catering/gi) || []).length * 6,
-                    service: (section.match(/customer|client|service|retail|communication/gi) || []).length * 4
+                    lead: countOccurrences(text, leadKeywords),
+                    event: countOccurrences(text, eventKeywords),
+                    service: countOccurrences(text, serviceKeywords)
                 };
 
-                // Weighted Total
-                const totalScore = (scores.lead * 0.5) + (scores.events * 0.3) + (scores.service * 0.2);
+                // 3. Weighted Calculation
+                // Max points per category capped at 100 for normalization
+                const normLead = Math.min(scores.lead * 8, 100);
+                const normEvent = Math.min(scores.event * 10, 100);
+                const normService = Math.min(scores.service * 5, 100);
 
-                // Attempt to grab name (usually the first few words of a resume block)
-                const nameMatch = section.trim().split(/\s+/).slice(0, 3).join(" ");
+                const finalScore = Math.round((normLead * 0.4) + (normEvent * 0.3) + (normService * 0.3));
 
-                processed.push({
-                    name: nameMatch || `Candidate ${index}`,
-                    scores,
-                    totalScore: Math.round(totalScore),
-                    preview: section.substring(0, 200) + "..."
+                // 4. Name Extraction Attempt
+                // Usually the first line of a resume chunk
+                const nameLine = text.trim().split(/[PAGE_END]/)[0].split(/\s+/).slice(0, 3).join(" ");
+
+                candidates.push({
+                    id: Date.now() + index,
+                    name: nameLine || `Candidate #${index}`,
+                    score: finalScore,
+                    metrics: { lead: normLead, event: normEvent, service: normService },
+                    preview: text.substring(0, 300).replace(/\[PAGE_END\]/g, '') + "..."
                 });
             });
 
-            // Sort by Rank
-            processed.sort((a, b) => b.totalScore - a.totalScore);
-            renderUI(processed);
+            // Sort by score
+            candidates.sort((a, b) => b.score - a.score);
+            updateDashboard(totalFound);
         }
 
-        function renderUI(list) {
-            document.getElementById('uploadArea').classList.add('hidden');
-            document.getElementById('resultsWrapper').classList.remove('hidden');
-            document.getElementById('matchCount').innerText = `${list.length} Grad Candidates Found`;
+        function countOccurrences(text, list) {
+            let count = 0;
+            const lowerText = text.toLowerCase();
+            list.forEach(word => {
+                const regex = new RegExp(word, 'gi');
+                const matches = text.match(regex);
+                if (matches) count += matches.length;
+            });
+            return count;
+        }
 
-            const topTen = list.slice(0, 10);
-            const others = list.slice(10);
+        function updateDashboard(totalFound) {
+            document.getElementById('totalCount').innerText = totalFound;
+            document.getElementById('gradCount').innerText = candidates.length;
+            document.getElementById('highPotCount').innerText = candidates.filter(c => c.score >= 80).length;
+            
+            renderList();
+        }
 
-            const listToHTML = (item, index, isTop) => `
-                <div class="candidate-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center ${isTop ? 'top-10-border shadow-md' : ''}">
-                    ${isTop ? `<div class="rank-badge">${index + 1}</div>` : ''}
-                    <div class="flex-1">
-                        <h4 class="text-lg font-bold text-indigo-900">${item.name}</h4>
-                        <p class="text-xs text-gray-400 mt-1 uppercase font-semibold">Master's Student Verified</p>
-                        <p class="text-sm text-gray-500 mt-2 italic">"${item.preview}"</p>
-                    </div>
-                    <div class="flex space-x-4 text-center border-l pl-6 ml-6 border-gray-100">
-                        <div>
-                            <p class="text-[10px] text-gray-400 font-bold uppercase">Leadership</p>
-                            <p class="text-lg font-bold text-indigo-600">${item.scores.lead}</p>
+        function renderList() {
+            const listEl = document.getElementById('resultsList');
+            if (candidates.length === 0) return;
+
+            const top10 = candidates.slice(0, 10);
+            
+            listEl.innerHTML = top10.map((c, i) => `
+                <div class="glass-card p-6 rounded-2xl shadow-sm hover:shadow-md transition-all relative overflow-hidden ${c.score >= 80 ? 'top-match-border' : ''}">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="flex-none">
+                            <div class="rank-indicator mb-2">#${i + 1}</div>
+                            <div class="text-center">
+                                <span class="text-3xl font-black text-indigo-600">${c.score}</span>
+                                <p class="text-[10px] font-bold text-indigo-400 uppercase">Match</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-[10px] text-gray-400 font-bold uppercase">Events</p>
-                            <p class="text-lg font-bold text-purple-600">${item.scores.events}</p>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-slate-800">${c.name}</h3>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-indigo-50 text-indigo-600 font-bold border border-indigo-100">GRAD STUDENT</span>
+                                ${c.metrics.lead > 50 ? '<span class="text-[10px] px-2 py-0.5 rounded bg-purple-50 text-purple-600 font-bold border border-purple-100">LEADERSHIP FOCUS</span>' : ''}
+                                ${c.metrics.event > 50 ? '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 font-bold border border-emerald-100">EVENT PRO</span>' : ''}
+                            </div>
+                            <p class="text-sm text-slate-500 mt-3 line-clamp-2 italic">"${c.preview}"</p>
                         </div>
-                        <div class="bg-indigo-50 px-4 py-1 rounded-xl">
-                            <p class="text-[10px] text-indigo-400 font-bold uppercase">Match Score</p>
-                            <p class="text-xl font-black text-indigo-700">${item.totalScore}</p>
+
+                        <div class="flex-none grid grid-cols-1 gap-2 border-l border-slate-100 pl-6">
+                            <div class="flex items-center justify-between min-w-[120px]">
+                                <span class="text-[10px] font-bold text-slate-400">LEADER</span>
+                                <span class="text-sm font-bold text-slate-700">${c.metrics.lead}%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-bold text-slate-400">EVENTS</span>
+                                <span class="text-sm font-bold text-slate-700">${c.metrics.event}%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-bold text-slate-400">SERVICE</span>
+                                <span class="text-sm font-bold text-slate-700">${c.metrics.service}%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            `;
+            `).join('');
+        }
 
-            document.getElementById('topTenList').innerHTML = topTen.map((c, i) => listToHTML(c, i, true)).join('');
-            document.getElementById('othersList').innerHTML = others.map((c, i) => listToHTML(c, i, false)).join('');
+        function clearAll() {
+            if (confirm("Clear all processed results?")) {
+                candidates = [];
+                document.getElementById('totalCount').innerText = '0';
+                document.getElementById('gradCount').innerText = '0';
+                document.getElementById('highPotCount').innerText = '0';
+                document.getElementById('resultsList').innerHTML = `
+                    <div id="emptyState" class="text-center py-24 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+                        <div class="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-600">Waiting for Master PDF</h3>
+                    </div>
+                `;
+            }
         }
     </script>
 </body>
