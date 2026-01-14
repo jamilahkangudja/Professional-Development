@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First in Business GA Screener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        .score-pill {
+            transition: all 0.3s ease;
+        }
+        @media print {
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="bg-indigo-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-1.5 rounded-lg">
+                    <svg class="w-6 h-6 text-indigo-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight">First in Business | <span class="font-light">GA Selection Portal</span></h1>
+            </div>
+            <div class="text-sm font-medium bg-indigo-800 px-3 py-1 rounded-full">
+                Privacy Mode: Local Only (FERPA Safe)
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <!-- Header & Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass-card p-6 rounded-2xl shadow-sm">
+                <h3 class="text-slate-500 text-sm font-semibold uppercase mb-1">Total Loaded</h3>
+                <p id="totalCount" class="text-3xl font-bold text-indigo-600">0</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
+                <h3 class="text-slate-500 text-sm font-semibold uppercase mb-1">High Potential</h3>
+                <p id="highPotCount" class="text-3xl font-bold text-emerald-600">0</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl shadow-sm">
+                <button onclick="document.getElementById('fileInput').click()" class="w-full h-full flex flex-col items-center justify-center space-y-2 text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors border-2 border-dashed border-indigo-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span class="font-semibold">Add New Candidate</span>
+                </button>
+                <input type="file" id="fileInput" class="hidden" multiple accept=".txt,.json">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Sidebar: Input Form -->
+            <div class="lg:col-span-4 space-y-6 no-print">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <h2 class="text-lg font-bold mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
+                        Manual Entry / Paste
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">FULL NAME</label>
+                            <input type="text" id="candName" placeholder="e.g. Alex Johnson" class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">RESUME TEXT (PASTE HERE)</label>
+                            <textarea id="resumeText" rows="6" placeholder="Paste resume content here to auto-scan keywords..." class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"></textarea>
+                        </div>
+                        <button onclick="processCandidate()" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 shadow-md transition-all active:scale-95">
+                            Analyze & Add to Queue
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm text-sm">
+                    <h3 class="font-bold text-slate-700 mb-2">Screening Criteria</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span> Customer Service Skills</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Event Planning / Mgmt</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span> Higher Ed / Business Background</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-amber-400 rounded-full mr-2"></span> Leadership / Student Orgs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content: Results -->
+            <div class="lg:col-span-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-slate-800">Candidate Queue</h2>
+                    <button onclick="clearAll()" class="text-red-500 text-sm hover:underline">Clear List</button>
+                </div>
+                
+                <div id="resultsList" class="space-y-4">
+                    <!-- Dynamic Items Here -->
+                    <div id="emptyState" class="text-center py-20 bg-white rounded-2xl border-2 border-dashed border-slate-200">
+                        <div class="text-slate-400 mb-2">No candidates analyzed yet.</div>
+                        <p class="text-sm text-slate-400 px-10">Paste a resume or upload text files to begin the automated screening process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let candidates = [];
+
+        // Specific Keyword Banks
+        const banks = {
+            customerService: ['customer', 'service', 'hospitality', 'client', 'retail', 'support', 'communication', 'guest'],
+            eventPlanning: ['event', 'planning', 'coordinator', 'logistics', 'catering', 'scheduling', 'management', 'venue', 'conference'],
+            higherEd: ['higher education', 'student affairs', 'university', 'college', 'academic', 'advising', 'registrar', 'campus'],
+            leadership: ['president', 'vp', 'officer', 'chair', 'lead', 'leadership', 'organization', 'extracurricular', 'engagement', 'volunteer']
+        };
+
+        function processCandidate() {
+            const name = document.getElementById('candName').value;
+            const text = document.getElementById('resumeText').value;
+
+            if (!name || !text) {
+                alert("Please provide at least a name and resume text.");
+                return;
+            }
+
+            const scores = scoreResume(text);
+            const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+
+            const candidate = {
+                id: Date.now(),
+                name,
+                text: text.substring(0, 500) + '...',
+                scores,
+                totalScore,
+                isBusiness: /business|marketing|finance|management|accounting/i.test(text)
+            };
+
+            candidates.unshift(candidate);
+            renderList();
+            
+            // Clear inputs
+            document.getElementById('candName').value = '';
+            document.getElementById('resumeText').value = '';
+            
+            updateStats();
+        }
+
+        function scoreResume(text) {
+            const normalizedText = text.toLowerCase();
+            let results = {
+                cs: 0,
+                events: 0,
+                edu: 0,
+                lead: 0
+            };
+
+            banks.customerService.forEach(word => { if (normalizedText.includes(word)) results.cs += 5; });
+            banks.eventPlanning.forEach(word => { if (normalizedText.includes(word)) results.events += 5; });
+            banks.higherEd.forEach(word => { if (normalizedText.includes(word)) results.edu += 5; });
+            banks.leadership.forEach(word => { if (normalizedText.includes(word)) results.lead += 5; });
+
+            // Normalize scores to max of 100 for visual
+            Object.keys(results).forEach(k => results[k] = Math.min(results[k], 100));
+            
+            return results;
+        }
+
+        function renderList() {
+            const list = document.getElementById('resultsList');
+            if (candidates.length === 0) {
+                document.getElementById('emptyState').classList.remove('hidden');
+                list.innerHTML = '';
+                return;
+            }
+            
+            document.getElementById('emptyState').classList.add('hidden');
+            
+            // Sort by score descending
+            candidates.sort((a, b) => b.totalScore - a.totalScore);
+
+            list.innerHTML = candidates.map(c => `
+                <div class="glass-card p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                    ${c.totalScore > 60 ? '<div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] px-3 py-1 font-bold rounded-bl-lg">TOP MATCH</div>' : ''}
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2">
+                                <h3 class="text-xl font-bold text-indigo-900">${c.name}</h3>
+                                ${c.isBusiness ? '<span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded">BUSINESS</span>' : ''}
+                            </div>
+                            <p class="text-slate-500 text-sm mt-1 line-clamp-2">${c.text}</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-2 shrink-0">
+                            <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[80px]">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase">Cust Svc</div>
+                                <div class="text-lg font-bold ${c.scores.cs > 20 ? 'text-indigo-600' : 'text-slate-300'}">${c.scores.cs}%</div>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[80px]">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase">Events</div>
+                                <div class="text-lg font-bold ${c.scores.events > 20 ? 'text-purple-600' : 'text-slate-300'}">${c.scores.events}%</div>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[80px]">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase">Edu/HiEd</div>
+                                <div class="text-lg font-bold ${c.scores.edu > 20 ? 'text-emerald-600' : 'text-slate-300'}">${c.scores.edu}%</div>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[80px]">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase">Leader</div>
+                                <div class="text-lg font-bold ${c.scores.lead > 20 ? 'text-amber-600' : 'text-slate-300'}">${c.scores.lead}%</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center md:pl-4 border-l border-slate-100">
+                             <button onclick="removeCandidate(${c.id})" class="text-slate-300 hover:text-red-500 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                             </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function removeCandidate(id) {
+            candidates = candidates.filter(c => c.id !== id);
+            renderList();
+            updateStats();
+        }
+
+        function clearAll() {
+            if(confirm("Clear all candidate data?")) {
+                candidates = [];
+                renderList();
+                updateStats();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalCount').innerText = candidates.length;
+            const highPot = candidates.filter(c => c.totalScore > 80).length;
+            document.getElementById('highPotCount').innerText = highPot;
+        }
+
+        // CSV/File Drop simulation
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            alert("This feature is ready for customization. In a real-world scenario, we could parse your CSV of 121 applicants here to bulk-analyze them instantly.");
+        });
+
+    </script>
+</body>
+</html>
