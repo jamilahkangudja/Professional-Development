@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWU FSL & Scott et al. Journey Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .serif { font-family: 'Crimson Pro', serif; }
+
+        .twu-maroon { color: #862633; }
+        .bg-twu-maroon { background-color: #862633; }
+        .border-twu-maroon { border-color: #862633; }
+
+        .journey-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .persona-btn.active {
+            background-color: #862633;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-color: #862633;
+        }
+
+        .glow-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(134, 38, 51, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(134, 38, 51, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(134, 38, 51, 0); }
+        }
+
+        /* Table Specific Styles */
+        .journey-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        .journey-table th {
+            background-color: #f9fafb;
+            border-bottom: 2px solid #e5e7eb;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .row-label {
+            background-color: #ffffff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #4b5563;
+            width: 180px;
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+        }
+
+        .journey-cell {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+            background-color: #fff;
+        }
+
+        .friction-point {
+            background-color: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .opportunity-point {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+        }
+
+        @media (max-width: 768px) {
+            .journey-table, .journey-table tbody, .journey-table tr, .journey-table td {
+                display: block;
+                width: 100%;
+            }
+            .journey-table thead { display: none; }
+            .row-label { background-color: #f9fafb; width: 100%; border-left: 4px solid #4b5563; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-12">
+        
+        <!-- SECTION 1: INTERACTIVE PERSONA JOURNEY -->
+        <div class="space-y-6">
+            <header class="text-center md:text-left">
+                <h1 class="text-3xl md:text-4xl font-bold twu-maroon mb-2">Student Prosperity Journey Map</h1>
+                <p class="text-gray-600 text-lg">Aligning FSL Leadership with the TWU Strategic Plan</p>
+                <div class="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+                    <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-400">Post-Pandemic Engagement</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-400">Restorative Justice</span>
+                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-400">Prosperity Focused</span>
+                </div>
+            </header>
+
+            <!-- Persona Selection -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="showPersona('satellite')" id="btn-satellite" class="persona-btn active p-4 rounded-xl border-2 border-gray-200 text-left bg-white journey-card hover:border-twu-maroon">
+                    <div class="font-bold text-lg">The Satellite Member</div>
+                    <div class="text-sm opacity-80">Distance Tax & Theoretical Bonding</div>
+                </button>
+                <button onclick="showPersona('legacy')" id="btn-legacy" class="persona-btn p-4 rounded-xl border-2 border-gray-200 text-left bg-white journey-card hover:border-twu-maroon">
+                    <div class="font-bold text-lg">The Legacy President</div>
+                    <div class="text-sm opacity-80">Grief & Pressure-Induced Silence</div>
+                </button>
+                <button onclick="showPersona('standing')" id="btn-standing" class="persona-btn p-4 rounded-xl border-2 border-gray-200 text-left bg-white journey-card hover:border-twu-maroon">
+                    <div class="font-bold text-lg">The Last One Standing</div>
+                    <div class="text-sm opacity-80">Sustainability Trap & Pregnancy</div>
+                </button>
+            </div>
+
+            <!-- The Interactive Timeline -->
+            <div class="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-gray-100">
+                <div id="persona-title" class="text-2xl font-bold twu-maroon mb-8 flex items-center gap-2">
+                    <span id="persona-icon">🚗</span> <span id="persona-name">The Satellite Member</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                    <!-- Phase 1 -->
+                    <div class="relative z-10">
+                        <div class="bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center mb-4 font-bold twu-maroon">1</div>
+                        <h3 class="font-bold mb-2 text-slate-800">Virtual Intake</h3>
+                        <p id="p-phase1" class="text-sm text-gray-600">Zoom-only content sessions. Monitored GroupMe chats. Identity built in browser tabs.</p>
+                    </div>
+                    <!-- Phase 2 -->
+                    <div class="relative z-10">
+                        <div class="bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center mb-4 font-bold twu-maroon">2</div>
+                        <h3 class="font-bold mb-2 text-slate-800">Transition Shock</h3>
+                        <p id="p-phase2" class="text-sm text-gray-600">First physical meetings. Lack of muscle memory. The 4-hour travel tax begins.</p>
+                    </div>
+                    <!-- Phase 3 -->
+                    <div class="relative z-10">
+                        <div class="bg-red-50 border border-red-200 p-4 rounded-lg glow-pulse">
+                            <div class="bg-red-500 w-10 h-10 rounded-full flex items-center justify-center mb-4 font-bold text-white italic">!</div>
+                            <h3 class="font-bold mb-2 text-red-700">The Friction Point</h3>
+                            <p id="p-phase3" class="text-sm text-red-600">Picking up President's slack. No physical bonding moments to offset the work.</p>
+                        </div>
+                    </div>
+                    <!-- Phase 4 -->
+                    <div class="relative z-10">
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <div class="bg-green-500 w-10 h-10 rounded-full flex items-center justify-center mb-4 font-bold text-white">✓</div>
+                            <h3 class="font-bold mb-2 text-green-700">Restorative Pivot</h3>
+                            <p id="p-phase4" class="text-sm text-green-600">Hybrid bonding rituals. Leadership coaching focused on sacrifice recognition.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alignment Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 border-t border-gray-100 pt-8">
+                    <div class="bg-twu-maroon text-white p-8 rounded-3xl shadow-lg">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            🦉 TWU Strategic Plan Alignment
+                        </h2>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-white/30 pl-4">
+                                <div class="font-bold uppercase text-[10px] tracking-widest opacity-70">Elevate Student Prosperity</div>
+                                <p class="text-sm italic">"Moving beyond wealth, prosperity embodies a fullness of life... promoting positive physical and mental health."</p>
+                            </div>
+                            <div class="border-l-4 border-white pl-4">
+                                <div class="font-bold uppercase text-[10px] tracking-widest opacity-70">The Intervention</div>
+                                <p id="intervention-text" class="text-sm">Recognizing the geographic and administrative tax as a barrier to "Fullness of Life."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+                        <h2 class="text-xl font-bold twu-maroon mb-4">Leadership Evolution</h2>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-[10px] font-bold">OLD</div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-500">Punitive Oversight</p>
+                                    <p class="text-xs text-gray-400 leading-relaxed">Focusing on compliance and "slack" while student is running on empty.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-[10px] text-green-700 font-bold">NEW</div>
+                                <div>
+                                    <p class="text-sm font-semibold text-twu-maroon">Supported Ownership</p>
+                                    <p id="leadership-text" class="text-xs text-gray-600 leading-relaxed">Accountability through coaching. Leading with love and co-creating a "Third Option."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: THE SCOTT ET AL. FRAMEWORK TABLE -->
+        <div class="bg-white shadow-2xl rounded-sm overflow-hidden border border-gray-200">
+            <div class="p-8 border-b border-gray-100 bg-white">
+                <h2 class="serif text-3xl font-semibold mb-2">Student Journey Map: Scott et al. Framework</h2>
+                <p class="text-gray-500 text-sm max-w-3xl">A systematic analysis of student engagement, institutional friction, and restorative opportunities during high-stakes organizational transitions.</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="journey-table">
+                    <thead>
+                        <tr>
+                            <th class="w-[180px]">Dimensions</th>
+                            <th>Phase 1: Virtual Onboarding</th>
+                            <th>Phase 2: Hybrid Transition</th>
+                            <th>Phase 3: Crisis & Friction</th>
+                            <th>Phase 4: Restorative Pivot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">Student Actions & Behaviors</td>
+                            <td class="journey-cell text-sm">Participating in high-frequency Zoom meetings; building relationships digitally; managed self-expression.</td>
+                            <td class="journey-cell text-sm">Attempting physical implementation of digital training; navigating "travel tax" for in-person requirements.</td>
+                            <td class="journey-cell text-sm friction-point font-medium">Withdrawal from communication; missed deadlines; struggling with legacy expectations vs physical capacity.</td>
+                            <td class="journey-cell text-sm opportunity-point font-medium">Engaging in coaching-based accountability; co-creating sustainable norms; prioritizing well-being.</td>
+                        </tr>
+
+                        <tr>
+                            <td class="row-label">Emotional State / "Pulse"</td>
+                            <td class="journey-cell">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                                    <span class="text-[10px] font-bold uppercase text-blue-600 tracking-tight">Optimistic / Performative</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Sense of belonging is theoretical; safety in the digital screen.</p>
+                            </td>
+                            <td class="journey-cell">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                    <span class="text-[10px] font-bold uppercase text-yellow-600 tracking-tight">Overwhelmed / Clashing</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Physical exhaustion; anxiety over legacy standards.</p>
+                            </td>
+                            <td class="journey-cell friction-point">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <span class="text-[10px] font-bold uppercase text-red-600 tracking-tight">Grief / Isolation</span>
+                                </div>
+                                <p class="text-xs text-gray-600 font-medium">"Sustainability Trap"; belief that failure is inevitable and personal.</p>
+                            </td>
+                            <td class="journey-cell opportunity-point">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <span class="text-[10px] font-bold uppercase text-green-600 tracking-tight">Relieved / Realigned</span>
+                                </div>
+                                <p class="text-xs text-gray-600 font-medium">De-coupling identity from the role; psychological safety returning.</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="row-label">Institutional Touchpoints</td>
+                            <td class="journey-cell text-xs italic text-slate-500">LMS, Virtual Town Halls, Group Chat Oversight.</td>
+                            <td class="journey-cell text-xs italic text-slate-500">Physical Classrooms, Administrative Offices, Ritual Spaces.</td>
+                            <td class="journey-cell text-xs italic friction-point text-red-700">Compliance Notices, Conduct Hearings, Delinquency Emails.</td>
+                            <td class="journey-cell text-xs italic opportunity-point text-green-700">One-on-One Coaching, Resiliency Meetings, Policy Adjustments.</td>
+                        </tr>
+
+                        <tr>
+                            <td class="row-label">Pain Points & Barriers</td>
+                            <td class="journey-cell">
+                                <ul class="text-[10px] space-y-1 list-disc pl-4 text-red-600 font-bold uppercase tracking-tighter">
+                                    <li>Lack of physical bonding</li>
+                                    <li>Digital fatigue</li>
+                                </ul>
+                            </td>
+                            <td class="journey-cell">
+                                <ul class="text-[10px] space-y-1 list-disc pl-4 text-red-600 font-bold uppercase tracking-tighter">
+                                    <li>The "Geographic Tax"</li>
+                                    <li>Ritual disconnect</li>
+                                </ul>
+                            </td>
+                            <td class="journey-cell friction-point">
+                                <ul class="text-[10px] space-y-1 list-disc pl-4 text-red-700 font-bold uppercase tracking-tighter">
+                                    <li>Grief-induced silence</li>
+                                    <li>Pregnancy/Health barriers</li>
+                                    <li>Legacy pressure</li>
+                                </ul>
+                            </td>
+                            <td class="journey-cell opportunity-point">
+                                <ul class="text-[10px] space-y-1 list-disc pl-4 text-green-700 font-bold uppercase tracking-tighter">
+                                    <li>Policy rigidity</li>
+                                    <li>Board misalignment</li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="row-label">Strategic Opportunities</td>
+                            <td class="journey-cell text-[11px] text-gray-500">Early identification of commuter students for tailored support.</td>
+                            <td class="journey-cell text-[11px] text-gray-500">Implementing "Muscle Memory" workshops to bridge digital-to-physical gaps.</td>
+                            <td class="journey-cell text-[11px] text-red-800 font-bold friction-point italic">Implementing "The Third Option"—a restorative alternative to punitive sanctions.</td>
+                            <td class="journey-cell text-[11px] text-green-800 font-bold opportunity-point italic">Advocating for administrative grace; normalizing operational pauses.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="p-6 bg-slate-50 border-t border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">
+                    Methodology: Scott, J. et al. "Mapping the Student Journey" (2020)
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex items-center gap-1">
+                        <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                        <span class="text-[10px] uppercase font-bold text-gray-400">Systemic Friction</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                        <span class="text-[10px] uppercase font-bold text-gray-400">Restorative Growth</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center text-gray-400 text-sm pb-10">
+            <p>"At the heart of all we do." — Texas Woman's University</p>
+        </footer>
+    </div>
+
+    <script>
+        const personaData = {
+            satellite: {
+                name: "The Satellite Member",
+                icon: "🚗",
+                phase1: "Zoom-only content sessions. Monitored GroupMe chats. Identity built in browser tabs.",
+                phase2: "First physical meetings. Lack of 'muscle memory' for rituals. The 4-hour travel tax begins.",
+                phase3: "Picking up President's slack from distance. No casual bonding to offset the heavy labor.",
+                phase4: "Hybrid bonding rituals. Commuter-specific support. Recognition of travel as service.",
+                intervention: "Recognizing the geographic and administrative tax as a barrier to Prosperity.",
+                leadership: "Validating sacrifice while providing clear, realistic expectations for distance roles."
+            },
+            legacy: {
+                name: "The Legacy President",
+                icon: "🖤",
+                phase1: "Joining via Zoom while grieving a father. High legacy expectations from national board family.",
+                phase2: "Action shock. Expected to lead in-person traditions she only saw on a screen.",
+                phase3: "Grief-induced silence. Communication lag. Quality shift in documentation. Non-compliance.",
+                phase4: "Resiliency Meeting. Leading with love. Decoupling identity from the 'President' title.",
+                intervention: "Providing 'Mental Health Prosperity' by offering a 'Third Option' for leadership.",
+                leadership: "Coaching through grief rather than sanctioning for missing paperwork."
+            },
+            standing: {
+                name: "The Last One Standing",
+                icon: "🤰",
+                phase1: "Only member on campus. Managing all Zoom logistics. Bearing the burden of continuity.",
+                phase2: "Discovery of pregnancy. Physical demands of intake clash with medical needs.",
+                phase3: "Sustainability Trap. The belief the chapter will fail if she stops 'Running on E.'",
+                phase4: "Administrative Grace. HQ advocacy for a chapter pause. Prioritizing graduation.",
+                intervention: "Ensuring 'Physical and Academic Health' through a formal operational pause.",
+                leadership: "Strategic advocacy at the HQ level to protect a student's graduation path."
+            }
+        };
+
+        function showPersona(key) {
+            document.querySelectorAll('.persona-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + key).classList.add('active');
+
+            const data = personaData[key];
+            document.getElementById('persona-name').innerText = data.name;
+            document.getElementById('persona-icon').innerText = data.icon;
+            document.getElementById('p-phase1').innerText = data.phase1;
+            document.getElementById('p-phase2').innerText = data.phase2;
+            document.getElementById('p-phase3').innerText = data.phase3;
+            document.getElementById('p-phase4').innerText = data.phase4;
+            document.getElementById('intervention-text').innerText = data.intervention;
+            document.getElementById('leadership-text').innerText = data.leadership;
+        }
+    </script>
+</body>
+</html>
