@@ -14,15 +14,17 @@
             70% { box-shadow: 0 0 0 10px rgba(157, 34, 53, 0); }
             100% { box-shadow: 0 0 0 0 rgba(157, 34, 53, 0); }
         }
+        .verb-chip { cursor: pointer; transition: all 0.2s; }
+        .verb-chip:hover { background-color: #9d2235; color: white; border-color: #9d2235; }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen py-10 px-4">
+<body class="bg-slate-50 min-h-screen py-10 px-4 text-left">
 
     <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
         <!-- Header -->
         <div class="bg-[#9d2235] p-8 text-white">
             <h1 class="text-3xl font-bold tracking-tight">SOAR Bullet Builder</h1>
-            <p class="mt-2 opacity-90 italic">Transform weak tasks into high-impact RCOB resume bullets.</p>
+            <p class="mt-2 opacity-90 italic text-left">Transform weak tasks into high-impact RCOB resume bullets.</p>
         </div>
 
         <div class="p-8">
@@ -31,10 +33,10 @@
                 <div class="absolute top-1/2 left-0 w-full h-1 bg-slate-100 -translate-y-1/2 z-0"></div>
                 <div id="progress-line" class="absolute top-1/2 left-0 h-1 bg-[#9d2235] -translate-y-1/2 z-0 transition-all duration-500" style="width: 0%"></div>
                 
-                <div class="z-10 bg-white px-2"><span id="dot-1" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#9d2235] bg-[#9d2235] text-white font-bold">S</span></div>
-                <div class="z-10 bg-white px-2"><span id="dot-2" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold">O</span></div>
-                <div class="z-10 bg-white px-2"><span id="dot-3" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold">A</span></div>
-                <div class="z-10 bg-white px-2"><span id="dot-4" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold">R</span></div>
+                <div class="z-10 bg-white px-2 text-center"><span id="dot-1" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#9d2235] bg-[#9d2235] text-white font-bold mx-auto">S</span><p class="text-[10px] mt-1 font-bold">Statement</p></div>
+                <div class="z-10 bg-white px-2 text-center"><span id="dot-2" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold mx-auto">O</span><p class="text-[10px] mt-1 font-bold">Occurrence</p></div>
+                <div class="z-10 bg-white px-2 text-center"><span id="dot-3" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold mx-auto">A</span><p class="text-[10px] mt-1 font-bold">Amount</p></div>
+                <div class="z-10 bg-white px-2 text-center"><span id="dot-4" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold mx-auto">R</span><p class="text-[10px] mt-1 font-bold">Result</p></div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-10">
@@ -42,16 +44,21 @@
                 <div class="space-y-6">
                     <!-- Step 1: Statement -->
                     <div id="step-1" class="step-active">
-                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">1. Statement (Action Verb + Task)</label>
-                        <p class="text-xs text-slate-500 mb-2">Start with a strong action verb. What did you do?</p>
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2 text-left">1. Statement (Action Verb + Task)</label>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span onclick="insertVerb('Managed')" class="verb-chip text-[10px] px-2 py-1 rounded border border-slate-300 bg-slate-50 text-slate-600 font-bold uppercase tracking-wider">Managed</span>
+                            <span onclick="insertVerb('Developed')" class="verb-chip text-[10px] px-2 py-1 rounded border border-slate-300 bg-slate-50 text-slate-600 font-bold uppercase tracking-wider">Developed</span>
+                            <span onclick="insertVerb('Analyzed')" class="verb-chip text-[10px] px-2 py-1 rounded border border-slate-300 bg-slate-50 text-slate-600 font-bold uppercase tracking-wider">Analyzed</span>
+                            <span onclick="insertVerb('Collaborated')" class="verb-chip text-[10px] px-2 py-1 rounded border border-slate-300 bg-slate-50 text-slate-600 font-bold uppercase tracking-wider">Collaborated</span>
+                            <span onclick="insertVerb('Implemented')" class="verb-chip text-[10px] px-2 py-1 rounded border border-slate-300 bg-slate-50 text-slate-600 font-bold uppercase tracking-wider">Implemented</span>
+                        </div>
                         <input type="text" id="input-s" placeholder="e.g. Trained new employees" 
                                class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none transition-colors">
                     </div>
 
                     <!-- Step 2: Occurrence -->
                     <div id="step-2" class="step-inactive">
-                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">2. Occurrence (Frequency)</label>
-                        <p class="text-xs text-slate-500 mb-2">How often did this happen?</p>
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2 text-left">2. Occurrence (Frequency)</label>
                         <select id="input-o" class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none bg-white">
                             <option value="">Select Frequency...</option>
                             <option value="on a daily basis">Daily</option>
@@ -59,12 +66,13 @@
                             <option value="on a monthly basis">Monthly</option>
                             <option value="per quarter">Quarterly</option>
                             <option value="per shift">Every Shift</option>
+                            <option value="over a 6-month period">Specific Duration</option>
                         </select>
                     </div>
 
                     <!-- Step 3: Amount -->
                     <div id="step-3" class="step-inactive">
-                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">3. Amount (Quantify)</label>
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2 text-left">3. Amount (Quantify)</label>
                         <p class="text-xs text-slate-500 mb-2">What was the scale? Use a specific number.</p>
                         <input type="text" id="input-a" placeholder="e.g. over 15 staff members" 
                                class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none">
@@ -72,18 +80,18 @@
 
                     <!-- Step 4: Result -->
                     <div id="step-4" class="step-inactive">
-                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">4. Result (The Outcome)</label>
-                        <p class="text-xs text-slate-500 mb-2">What was the positive impact?</p>
-                        <input type="text" id="input-r" placeholder="e.g. which increased customer satisfaction by 12%" 
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2 text-left">4. Result (The Outcome)</label>
+                        <p class="text-xs text-slate-500 mb-2">What happened? Use "which [result]" or "resulting in..."</p>
+                        <input type="text" id="input-r" placeholder="e.g. which increased efficiency by 20%" 
                                class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none">
                     </div>
                 </div>
 
                 <!-- Preview Side -->
                 <div class="bg-slate-100 rounded-xl p-6 border border-slate-200 flex flex-col">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">RCOB Live Preview</h3>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 text-left">RCOB Live Preview</h3>
                     
-                    <div id="bullet-output" class="flex-grow bg-white p-6 rounded-lg border border-slate-200 text-slate-800 font-serif leading-relaxed italic">
+                    <div id="bullet-output" class="flex-grow bg-white p-6 rounded-lg border border-slate-200 text-slate-800 font-serif leading-relaxed italic text-left">
                         Start typing to see your SOAR bullet take shape...
                     </div>
 
@@ -99,14 +107,18 @@
                         </button>
                     </div>
                     
-                    <div id="feedback-msg" class="mt-4 text-xs text-center font-medium"></div>
+                    <div id="feedback-msg" class="mt-4 text-xs text-center font-medium h-4"></div>
                 </div>
             </div>
         </div>
         
-        <div class="bg-slate-50 border-t border-slate-200 p-6">
-            <h4 class="text-sm font-bold text-slate-700 mb-2">Example RCOB Standard:</h4>
-            <p class="text-sm text-slate-600 font-serif italic">"Trained <span class="text-blue-600 font-bold">over 15 wait staff</span> <span class="text-purple-600 font-bold">on a monthly basis</span> which <span class="text-green-600 font-bold">increased customer satisfaction and sales of new menu items 3 quarters in a row.</span>"</p>
+        <div class="bg-slate-50 border-t border-slate-200 p-6 text-left">
+            <h4 class="text-sm font-bold text-slate-700 mb-2">RCOB Logic Check:</h4>
+            <div class="flex gap-4 text-[11px]">
+                <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-blue-500"></div> S + A</div>
+                <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-purple-500"></div> + O</div>
+                <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-500"></div> + R</div>
+            </div>
         </div>
     </div>
 
@@ -136,23 +148,48 @@
         const copyBtn = document.getElementById('copy-btn');
         const progressLine = document.getElementById('progress-line');
 
+        function insertVerb(verb) {
+            inputs.s.value = verb + " ";
+            inputs.s.focus();
+            updateUI();
+        }
+
         function updateUI() {
             const s = inputs.s.value.trim();
             const o = inputs.o.value;
             const a = inputs.a.value.trim();
             const r = inputs.r.value.trim();
 
-            // Progress Logic
-            let progress = 0;
-            if (s) { progress = 25; steps[1].classList.replace('step-inactive', 'step-active'); setDot(1); }
-            if (o) { progress = 50; steps[2].classList.replace('step-inactive', 'step-active'); setDot(2); }
-            if (a) { progress = 75; steps[3].classList.replace('step-inactive', 'step-active'); setDot(3); }
-            if (r) { progress = 100; setDot(4); }
+            // Handle step unlocking and progress visual
+            let activeProgress = 0;
+            
+            // Reset visual states
+            steps.forEach((step, i) => { if(i > 0) step.classList.replace('step-active', 'step-inactive'); });
+            dots.forEach((dot, i) => { if(i > 0) { dot.classList.replace('bg-[#9d2235]', 'bg-white'); dot.classList.replace('border-[#9d2235]', 'border-slate-200'); dot.classList.replace('text-white', 'text-slate-400'); } });
 
-            progressLine.style.width = (progress - 12.5) + '%';
-            if (progress === 0) progressLine.style.width = '0%';
+            if (s) { 
+                activeProgress = 25; 
+                steps[1].classList.replace('step-inactive', 'step-active'); 
+                setDot(0); 
+            }
+            if (s && o) { 
+                activeProgress = 50; 
+                steps[2].classList.replace('step-inactive', 'step-active'); 
+                setDot(1); 
+            }
+            if (s && o && a) { 
+                activeProgress = 75; 
+                steps[3].classList.replace('step-inactive', 'step-active'); 
+                setDot(2); 
+            }
+            if (s && o && a && r) { 
+                activeProgress = 100; 
+                setDot(3); 
+            }
 
-            // Bullet Construction
+            progressLine.style.width = (activeProgress > 0 ? (activeProgress - 12.5) : 0) + '%';
+
+            // Construct Final Bullet
             if (!s && !o && !a && !r) {
                 output.innerText = "Start typing to see your SOAR bullet take shape...";
                 copyBtn.disabled = true;
@@ -160,21 +197,29 @@
                 return;
             }
 
-            // Assemble RCOB format: Statement + Amount + Occurrence + Result
-            // Note: RCOB template example uses: [Action] + [Amount] + [Occurrence] + [Result]
-            let bullet = `• `;
-            if (s) bullet += `${s} `;
-            if (a) bullet += `${a} `;
-            if (o) bullet += `${o} `;
-            if (r) bullet += `${r}`;
+            // Assembly logic: Statement (S) + Amount (A) + Occurrence (O) + Result (R)
+            let parts = [];
+            if (s) parts.push(s);
+            if (a) parts.push(a);
+            if (o) parts.push(o);
+            if (r) {
+                // Check if result already starts with 'which' or 'resulting'
+                let cleanR = r.toLowerCase().startsWith('which') || r.toLowerCase().startsWith('resulting') ? r : `which ${r}`;
+                parts.push(cleanR);
+            }
 
-            output.innerText = bullet;
+            let resultString = "• " + parts.join(" ");
+            // Final polish: fix double spaces and ensure ends with period
+            resultString = resultString.replace(/\s+/g, ' ');
+            if (r && !resultString.endsWith('.')) resultString += ".";
 
-            // Enable Copy if complete
+            output.innerText = resultString;
+
+            // Enable Copy if all fields have content
             if (s && o && a && r) {
                 copyBtn.disabled = false;
-                copyBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-[#9d2235]');
-                copyBtn.classList.add('bg-[#9d2235]', 'success-pulse');
+                copyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                copyBtn.classList.add('success-pulse');
             } else {
                 copyBtn.disabled = true;
                 copyBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -190,12 +235,6 @@
 
         function resetBuilder() {
             Object.values(inputs).forEach(input => input.value = '');
-            steps.slice(1).forEach(step => step.classList.replace('step-active', 'step-inactive'));
-            dots.slice(1).forEach(dot => {
-                dot.classList.replace('border-[#9d2235]', 'border-slate-200');
-                dot.classList.replace('text-white', 'text-slate-400');
-                dot.classList.remove('bg-[#9d2235]');
-            });
             updateUI();
         }
 
@@ -209,13 +248,14 @@
             document.body.removeChild(el);
             
             const msg = document.getElementById('feedback-msg');
-            msg.innerText = "✅ Copied to clipboard! Paste this into your resume.";
+            msg.innerText = "✅ Copied! Paste it into your Word doc.";
             msg.className = "mt-4 text-xs text-center font-bold text-green-600";
             setTimeout(() => { msg.innerText = ""; }, 3000);
         }
 
         Object.values(inputs).forEach(input => {
             input.addEventListener('input', updateUI);
+            input.addEventListener('change', updateUI);
         });
     </script>
 </body>
