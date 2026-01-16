@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Mastering Email Mail Merge</title>
+    <style>
+        :root {
+            --primary-blue: #2b579a;
+            --excel-green: #217346;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f4f4f9; }
+        header { background: var(--primary-blue); color: white; padding: 2.5rem 1.5rem; border-radius: 10px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--primary-blue); border-bottom: 2px solid var(--primary-blue); padding-bottom: 8px; margin-top: 40px; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .step-number { background: var(--primary-blue); color: white; width: 28px; height: 28px; display: inline-block; text-align: center; border-radius: 50%; font-weight: bold; margin-right: 10px; }
+        .excel-focus { border-left: 5px solid var(--excel-green); }
+        code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; color: #d63384; }
+        
+        /* Table Styling */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid var(--border-color); padding: 12px; text-align: left; }
+        th { background-color: #e9ecef; color: var(--excel-green); }
+
+        /* Example Comparison Box */
+        .example-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .example-box { background: #fff; border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; }
+        .example-header { font-weight: bold; margin-bottom: 10px; color: #555; text-transform: uppercase; font-size: 0.8rem; }
+        .placeholder-text { color: #2b579a; font-weight: bold; }
+
+        .pro-tip { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Mail Merge: Word to Email</h1>
+    <p>Personalize hundreds of emails using Excel and Microsoft Word.</p>
+</header>
+
+<section>
+    <h2>Step 1: The Excel Foundation</h2>
+    <div class="card excel-focus">
+        <p>Success in Mail Merge depends 90% on how you format your Excel file. If your headers are messy, Word won't know where to put your data.</p>
+        
+        <p><strong>Crucial Formatting Rules:</strong></p>
+        <ul>
+            <li><strong>Row 1 Must Be Headers:</strong> Use simple, one-word headers (e.g., <code>FirstName</code>, <code>LastName</code>, <code>EmailAddress</code>).</li>
+            <li><strong>No Blank Rows:</strong> Do not leave empty rows at the top or in the middle of your list.</li>
+            <li><strong>Close the File:</strong> Word cannot "read" the Excel file if it is currently open in Excel.</li>
+        </ul>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>Company</th>
+                    <th>EmailAddress</th>
+                    <th>Project</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alex</td>
+                    <td>Innovate Lab</td>
+                    <td>alex@example.com</td>
+                    <td>Alpha Phase</td>
+                </tr>
+                <tr>
+                    <td>Jordan</td>
+                    <td>Tech Stream</td>
+                    <td>jordan@stream.net</td>
+                    <td>Beta Launch</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section>
+    <h2>Step 2: Connecting Word to Data</h2>
+    <div class="card">
+        <p><span class="step-number">1</span> Open a blank Microsoft Word document and write your email draft.</p>
+        <p><span class="step-number">2</span> Go to the <strong>Mailings</strong> tab at the top.</p>
+        <p><span class="step-number">3</span> Click <strong>Select Recipients</strong> > <strong>Use an Existing List...</strong></p>
+        <p><span class="step-number">4</span> Find your saved Excel file. When prompted, select <code>Sheet1$</code> and make sure the box for <em>"First row contains headers"</em> is checked.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Step 3: Inserting Merge Fields</h2>
+    <div class="card">
+        <p>Now you replace generic names with "Placeholders" (Merge Fields).</p>
+        <ol>
+            <li>Highlight the text you want to personalize (e.g., "Customer").</li>
+            <li>In the <strong>Mailings</strong> tab, click <strong>Insert Merge Field</strong>.</li>
+            <li>Select the header name that matches your Excel column (e.g., <code>FirstName</code>).</li>
+        </ol>
+        
+        <div class="pro-tip">
+            <strong>Pro Tip:</strong> Mail merge fields look like this: <code>«FirstName»</code>. Make sure there is a space <strong>before</strong> and <strong>after</strong> the brackets, otherwise your text will look like "HiAlex" instead of "Hi Alex".
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Live Example: Before & After</h2>
+    <div class="card">
+        <p>Here is how your draft transforms from a template into a real email.</p>
+        
+        <div class="example-container">
+            <div class="example-box">
+                <div class="example-header">In Word (The Template)</div>
+                <p><strong>Subject:</strong> Update on <span class="placeholder-text">«Project»</span></p>
+                <p>Hi <span class="placeholder-text">«FirstName»</span>,</p>
+                <p>It was great meeting with the team at <span class="placeholder-text">«Company»</span>. We are moving forward with <span class="placeholder-text">«Project»</span> today.</p>
+            </div>
+
+            <div class="example-box" style="background-color: #f0f7ff;">
+                <div class="example-header">In the Inbox (The Result)</div>
+                <p><strong>Subject:</strong> Update on Alpha Phase</p>
+                <p>Hi Alex,</p>
+                <p>It was great meeting with the team at Innovate Lab. We are moving forward with Alpha Phase today.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Step 4: Sending the Emails</h2>
+    <div class="card">
+        <ol>
+            <li>Click <strong>Preview Results</strong> in the Mailings tab to double-check the names.</li>
+            <li>Click <strong>Finish & Merge</strong> > <strong>Send Email Messages</strong>.</li>
+            <li>In the popup box:
+                <ul>
+                    <li><strong>To:</strong> Select the <code>EmailAddress</code> column.</li>
+                    <li><strong>Subject line:</strong> Type the subject your recipients will see.</li>
+                    <li><strong>Mail format:</strong> Choose <strong>HTML</strong> (recommended).</li>
+                </ul>
+            </li>
+            <li>Click <strong>OK</strong>. Outlook will now begin sending the emails!</li>
+        </ol>
+    </div>
+</section>
+
+<footer style="text-align: center; color: #888; margin: 40px 0;">
+    <p>Required Software: Microsoft Word, Microsoft Excel, and Microsoft Outlook.</p>
+</footer>
+
+</body>
+</html>
