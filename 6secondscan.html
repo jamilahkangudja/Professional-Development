@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-Second Recruiter Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .resume-preview {
+            aspect-ratio: 8.5/11;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+        .timer-bar {
+            transition: width 0.1s linear;
+        }
+        .blur-text {
+            filter: blur(1px);
+            user-select: none;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+        }
+        /* Scoped font classes to simulate the "Font Salad" */
+        .font-arial { font-family: Arial, sans-serif; }
+        .font-times { font-family: 'Times New Roman', serif; }
+        .font-calibri { font-family: 'Calibri', 'Candara', sans-serif; }
+        .font-courier { font-family: 'Courier New', monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+<div id="app" class="max-w-4xl mx-auto p-4 md:p-8">
+    
+    <!-- HEADER -->
+    <header class="mb-8 border-b pb-4 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800 uppercase tracking-tighter">Recruiter Challenge</h1>
+            <p class="text-slate-500 text-sm italic">Phase 1: The 6-Second Scan</p>
+        </div>
+        <div id="game-stats" class="hidden flex space-x-4">
+            <div class="text-center">
+                <span id="current-count" class="block font-bold text-xl text-amber-600">1/5</span>
+                <span class="text-[10px] uppercase text-slate-400">Resume</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- START SCREEN -->
+    <div id="start-screen" class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold mb-4 text-slate-800">Your Task</h2>
+        <p class="mb-4 text-slate-600 leading-relaxed">
+            You are a hiring manager reviewing hundreds of applications. You have <strong>6 seconds</strong> per resume.
+        </p>
+        <div class="bg-slate-100 p-4 rounded-lg mb-6">
+            <h3 class="font-bold text-sm uppercase text-slate-500 mb-2">Decide: KEEP or TOSS?</h3>
+            <ul class="text-sm space-y-1 text-slate-700">
+                <li>✅ <strong>KEEP:</strong> Professional, consistent, and template-clean.</li>
+                <li>❌ <strong>TOSS:</strong> Instruction brackets left in, inconsistent fonts, or messy date alignment.</li>
+            </ul>
+        </div>
+        <button onclick="startGame()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-lg hover:bg-slate-800 transition active:scale-95">
+            BEGIN SCANNING
+        </button>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game-screen" class="hidden">
+        <div class="w-full bg-slate-200 h-2 rounded-full mb-6 overflow-hidden">
+            <div id="timer-bar" class="timer-bar bg-amber-500 h-full w-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-5 gap-8 items-start">
+            <div class="md:col-span-1 order-2 md:order-1 flex flex-col space-y-4">
+                <button onclick="recordDecision('keep')" class="bg-green-600 text-white p-4 rounded-xl font-bold hover:bg-green-700 transition shadow-lg">KEEP</button>
+                <button onclick="recordDecision('toss')" class="bg-rose-600 text-white p-4 rounded-xl font-bold hover:bg-rose-700 transition shadow-lg">TOSS</button>
+            </div>
+
+            <div class="md:col-span-4 order-1 md:order-2">
+                <div id="resume-container" class="resume-preview p-8 border border-slate-300 relative text-[9px] leading-tight">
+                    <!-- Resumes injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="results-screen" class="hidden">
+        <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-2xl font-bold mb-2 text-slate-800">Review Summary</h2>
+            <p id="accuracy-msg" class="text-slate-600 mb-6"></p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-sm text-slate-500 uppercase mb-4">Recruiter Rejection Metrics:</h3>
+                    <div class="chart-container">
+                        <canvas id="rejectionChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="font-bold text-sm text-slate-500 uppercase">Debrief (The "Why"):</h3>
+                    <div id="critique-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <button onclick="location.reload()" class="w-full border-2 border-slate-900 text-slate-900 font-bold py-3 rounded-lg hover:bg-slate-50">
+                RETRY CHALLENGE
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const resumes = [
+        {
+            id: 0,
+            type: 'flawed',
+            error: 'Placeholder Instructions',
+            name: 'Johnathon Miller',
+            content: `
+                <div class="text-center mb-4">
+                    <div class="font-bold text-lg">JOHNATHON MILLER</div>
+                    <div class="text-slate-600">[Insert City, State] | 479-555-0123 | jmiller@uark.edu</div>
+                </div>
+                <div class="mb-4">
+                    <div class="font-bold uppercase border-b border-black mb-1">Professional Profile</div>
+                    <p class="mb-1 text-slate-800">[Write 2-3 sentences about your professional background and transferable skills here.]</p>
+                    <p>Motivated Finance student with a focus on investment analytics. Currently serving as a Treasurer for a campus organization, managing a budget of $5,000.</p>
+                </div>
+                <div class="mb-4">
+                    <div class="font-bold uppercase border-b border-black mb-1">Education</div>
+                    <div class="flex justify-between font-bold"><span>University of Arkansas, Walton College of Business</span><span>May 2026</span></div>
+                    <div class="flex justify-between italic"><span>Bachelor of Science in Business Administration</span><span>Fayetteville, AR</span></div>
+                    <ul class="list-disc ml-4 mt-1"><li>Major: Finance | GPA: 3.6</li><li>Relevant Coursework: Financial Management, Data Analysis</li></ul>
+                </div>
+                <div class="mb-4">
+                    <div class="font-bold uppercase border-b border-black mb-1">Experience</div>
+                    <div class="flex justify-between font-bold"><span>Financial Services Intern</span><span>Summer 2024</span></div>
+                    <div class="italic">Stephens Inc.</div>
+                    <ul class="list-disc ml-4">
+                        <li>Assisted with data entry for portfolio management accounts.</li>
+                        <li>Shadowed senior analysts during client meetings and strategy sessions.</li>
+                    </ul>
+                </div>`,
+            critique: "TOSS: This resume still contains bracketed instructions like '[Insert City, State]'. It tells the recruiter you didn't even read your own final draft."
+        },
+        {
+            id: 1,
+            type: 'perfect',
+            error: 'None',
+            name: 'Sarah Williams',
+            content: `
+                <div class="text-center mb-4 font-arial">
+                    <div class="font-bold text-lg">SARAH WILLIAMS</div>
+                    <div class="text-slate-600">Fayetteville, AR | 479-555-9876 | swilliams@uark.edu | LinkedIn.com/in/swilliams</div>
+                </div>
+                <div class="mb-4 font-arial">
+                    <div class="font-bold uppercase border-b-2 border-slate-800 mb-1">Professional Profile</div>
+                    <p class="text-slate-800">High-achieving Marketing major with experience in retail leadership and social media strategy. Proven ability to analyze consumer data to drive promotional engagement and customer loyalty.</p>
+                </div>
+                <div class="mb-4 font-arial">
+                    <div class="font-bold uppercase border-b-2 border-slate-800 mb-1">Education</div>
+                    <div class="flex justify-between"><strong>University of Arkansas</strong><strong>May 2025</strong></div>
+                    <div class="flex justify-between italic"><span>BSBA in Marketing</span><span>Fayetteville, AR</span></div>
+                </div>
+                <div class="mb-4 font-arial">
+                    <div class="font-bold uppercase border-b-2 border-slate-800 mb-1">Experience</div>
+                    <div class="mb-3">
+                        <div class="flex justify-between"><strong>Assistant Store Manager</strong><strong>Jan 2023 – Present</strong></div>
+                        <div class="italic">The Mustache Goods & Wears</div>
+                        <ul class="list-disc ml-4">
+                            <li>Oversee daily inventory intake and merchandising for a high-traffic retail location.</li>
+                            <li>Increased social media engagement by 15% through targeted local campaigns.</li>
+                        </ul>
+                    </div>
+                </div>`,
+            critique: "KEEP: This is the RCOB standard. Consistent fonts (Arial), perfectly right-aligned dates, and all placeholders removed."
+        },
+        {
+            id: 2,
+            type: 'flawed',
+            error: 'Font Salad',
+            name: 'David Thompson',
+            content: `
+                <div class="text-center mb-4 font-times">
+                    <div class="font-bold text-xl uppercase">David Thompson</div>
+                    <div class="text-slate-500 font-arial text-[7px]">Fayetteville, AR | 479-555-0000 | dthomp@uark.edu</div>
+                </div>
+                <div class="mb-4 font-calibri">
+                    <div class="font-bold uppercase border-b bg-slate-50 px-1 mb-1" style="font-family: 'Times New Roman'">Education</div>
+                    <div class="flex justify-between"><strong>University of Arkansas</strong><span style="font-family: Arial">May 2027</span></div>
+                    <div class="italic">Accounting Major</div>
+                </div>
+                <div class="mb-4 font-times">
+                    <div class="font-bold uppercase border-b bg-slate-50 px-1 mb-1" style="font-family: 'Times New Roman'">Experience</div>
+                    <div class="mb-2">
+                        <div class="font-bold" style="font-family: 'Courier New'">Office Assistant, ABC Logistics</div>
+                        <ul class="list-disc ml-4 text-[8px]" style="font-family: Arial">
+                            <li>Managed filing systems for over 200 client accounts annually.</li>
+                            <li>Answered multi-line phone systems and directed inquiries to appropriate staff.</li>
+                        </ul>
+                    </div>
+                </div>`,
+            critique: "TOSS: 'Font Salad.' This resume uses Times, Arial, Calibri, and Courier. It creates visual chaos that makes scanning impossible."
+        },
+        {
+            id: 3,
+            type: 'flawed',
+            error: 'Alignment Issues',
+            name: 'Jessica Martinez',
+            content: `
+                <div class="text-center mb-4">
+                    <div class="font-bold text-lg">JESSICA MARTINEZ</div>
+                    <div class="text-slate-600">Rogers, AR | jmartinez@uark.edu</div>
+                </div>
+                <div class="mb-4">
+                    <div class="font-bold uppercase border-b border-black mb-1">Education</div>
+                    <div>University of Arkansas - BSBA in Management &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; May 2025</div>
+                </div>
+                <div class="mb-4">
+                    <div class="font-bold uppercase border-b border-black mb-1">Experience</div>
+                    <div class="mb-3">
+                        <div><strong>Waitstaff - Hammontree's Grilled Cheese</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2022 - 2024</div>
+                        <ul class="list-disc ml-4">
+                            <li>Provided efficient service to over 50 customers per shift in a fast-paced setting.</li>
+                            <li>Maintained accurate cash drawer and processed transactions securely.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <div><strong>Volunteer - NWA Food Bank</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Summer 2021</div>
+                    </div>
+                </div>`,
+            critique: "TOSS: Poor Alignment. Dates are 'tabbed' over manually, creating a jagged edge on the right. Recruiters expect a clean, right-aligned margin."
+        },
+        {
+            id: 4,
+            type: 'perfect',
+            error: 'None',
+            name: 'Marcus Chen',
+            content: `
+                <div class="text-center mb-4 font-calibri">
+                    <div class="font-bold text-lg">MARCUS CHEN</div>
+                    <div class="text-slate-600">Bentonville, AR | 479-555-1122 | mchen@uark.edu</div>
+                </div>
+                <div class="mb-4 font-calibri">
+                    <div class="font-bold uppercase border-b border-black mb-1">Professional Profile</div>
+                    <p>Supply Chain Management student with professional internship experience in global procurement. Skilled in Microsoft Excel and data visualization tools for inventory optimization.</p>
+                </div>
+                <div class="mb-4 font-calibri">
+                    <div class="font-bold uppercase border-b border-black mb-1">Education</div>
+                    <div class="flex justify-between"><strong>University of Arkansas</strong><strong>Dec 2025</strong></div>
+                    <div class="flex justify-between italic"><span>BSBA in Supply Chain Management</span><span>Fayetteville, AR</span></div>
+                </div>
+                <div class="mb-4 font-calibri">
+                    <div class="font-bold uppercase border-b border-black mb-1">Experience</div>
+                    <div class="mb-2">
+                        <div class="flex justify-between"><strong>Global Sourcing Intern</strong><strong>June 2024 – Aug 2024</strong></div>
+                        <div class="italic">Walmart Corporate</div>
+                        <ul class="list-disc ml-4">
+                            <li>Supported sourcing managers in identifying cost-saving opportunities in plastic packaging.</li>
+                            <li>Coordinated with vendors across three time zones to ensure timely shipments.</li>
+                        </ul>
+                    </div>
+                </div>`,
+            critique: "KEEP: This resume is dense but remains scannable. The hierarchy is clear, and the alignment is professional."
+        }
+    ];
+
+    let currentResumeIdx = 0;
+    let decisions = [];
+    let timeLeft = 6.0;
+    let timerInterval;
+
+    function startGame() {
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+        document.getElementById('game-stats').classList.remove('hidden');
+        loadResume();
+    }
+
+    function loadResume() {
+        if (currentResumeIdx >= resumes.length) {
+            endGame();
+            return;
+        }
+        document.getElementById('current-count').innerText = `${currentResumeIdx + 1}/5`;
+        document.getElementById('resume-container').innerHTML = resumes[currentResumeIdx].content;
+        timeLeft = 6.0;
+        const timerBar = document.getElementById('timer-bar');
+        timerBar.style.width = '100%';
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            timeLeft -= 0.1;
+            timerBar.style.width = (timeLeft / 6.0) * 100 + '%';
+            if (timeLeft <= 0) recordDecision('timeout');
+        }, 100);
+    }
+
+    function recordDecision(choice) {
+        clearInterval(timerInterval);
+        const current = resumes[currentResumeIdx];
+        decisions.push({
+            id: currentResumeIdx,
+            choice: choice,
+            isCorrect: (choice === 'keep' && current.type === 'perfect') || (choice === 'toss' && current.type === 'flawed')
+        });
+        currentResumeIdx++;
+        loadResume();
+    }
+
+    function endGame() {
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('results-screen').classList.remove('hidden');
+        const score = decisions.filter(d => d.isCorrect).length;
+        document.getElementById('accuracy-msg').innerText = `You correctly identified ${score}/5 resumes. In the real world, a single mistake could lead to a missed opportunity.`;
+        
+        const critiqueContainer = document.getElementById('critique-list');
+        resumes.forEach((res, i) => {
+            const userDec = decisions[i];
+            const div = document.createElement('div');
+            div.className = `p-3 rounded border-l-4 ${userDec.isCorrect ? 'bg-green-50 border-green-500' : 'bg-rose-50 border-rose-500'}`;
+            div.innerHTML = `<p class="text-xs font-bold uppercase">${res.name}</p><p class="text-[11px] text-slate-700">${res.critique}</p>`;
+            critiqueContainer.appendChild(div);
+        });
+        initChart();
+    }
+
+    function initChart() {
+        const ctx = document.getElementById('rejectionChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Placeholders', 'Font Salad', 'Bad Alignment', 'RCOB Standard'],
+                datasets: [{
+                    label: 'Rejection Probability',
+                    data: [100, 90, 80, 5],
+                    backgroundColor: ['#be123c', '#d97706', '#2563eb', '#059669'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { beginAtZero: true, max: 100 } }
+            }
+        });
+    }
+</script>
+</body>
+</html>
