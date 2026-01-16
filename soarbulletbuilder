@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCOB SOAR Bullet Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .step-inactive { opacity: 0.5; pointer-events: none; filter: grayscale(1); }
+        .step-active { opacity: 1; pointer-events: auto; filter: none; }
+        .success-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(157, 34, 53, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(157, 34, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(157, 34, 53, 0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen py-10 px-4">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+        <!-- Header -->
+        <div class="bg-[#9d2235] p-8 text-white">
+            <h1 class="text-3xl font-bold tracking-tight">SOAR Bullet Builder</h1>
+            <p class="mt-2 opacity-90 italic">Transform weak tasks into high-impact RCOB resume bullets.</p>
+        </div>
+
+        <div class="p-8">
+            <!-- Progress Bar -->
+            <div class="flex justify-between mb-10 relative">
+                <div class="absolute top-1/2 left-0 w-full h-1 bg-slate-100 -translate-y-1/2 z-0"></div>
+                <div id="progress-line" class="absolute top-1/2 left-0 h-1 bg-[#9d2235] -translate-y-1/2 z-0 transition-all duration-500" style="width: 0%"></div>
+                
+                <div class="z-10 bg-white px-2"><span id="dot-1" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#9d2235] bg-[#9d2235] text-white font-bold">S</span></div>
+                <div class="z-10 bg-white px-2"><span id="dot-2" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold">O</span></div>
+                <div class="z-10 bg-white px-2"><span id="dot-3" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold">A</span></div>
+                <div class="z-10 bg-white px-2"><span id="dot-4" class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 bg-white text-slate-400 font-bold">R</span></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Input Side -->
+                <div class="space-y-6">
+                    <!-- Step 1: Statement -->
+                    <div id="step-1" class="step-active">
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">1. Statement (Action Verb + Task)</label>
+                        <p class="text-xs text-slate-500 mb-2">Start with a strong action verb. What did you do?</p>
+                        <input type="text" id="input-s" placeholder="e.g. Trained new employees" 
+                               class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none transition-colors">
+                    </div>
+
+                    <!-- Step 2: Occurrence -->
+                    <div id="step-2" class="step-inactive">
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">2. Occurrence (Frequency)</label>
+                        <p class="text-xs text-slate-500 mb-2">How often did this happen?</p>
+                        <select id="input-o" class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none bg-white">
+                            <option value="">Select Frequency...</option>
+                            <option value="on a daily basis">Daily</option>
+                            <option value="on a weekly basis">Weekly</option>
+                            <option value="on a monthly basis">Monthly</option>
+                            <option value="per quarter">Quarterly</option>
+                            <option value="per shift">Every Shift</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 3: Amount -->
+                    <div id="step-3" class="step-inactive">
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">3. Amount (Quantify)</label>
+                        <p class="text-xs text-slate-500 mb-2">What was the scale? Use a specific number.</p>
+                        <input type="text" id="input-a" placeholder="e.g. over 15 staff members" 
+                               class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none">
+                    </div>
+
+                    <!-- Step 4: Result -->
+                    <div id="step-4" class="step-inactive">
+                        <label class="block text-sm font-bold text-slate-700 uppercase mb-2">4. Result (The Outcome)</label>
+                        <p class="text-xs text-slate-500 mb-2">What was the positive impact?</p>
+                        <input type="text" id="input-r" placeholder="e.g. which increased customer satisfaction by 12%" 
+                               class="w-full p-3 border-2 border-slate-200 rounded-lg focus:border-[#9d2235] outline-none">
+                    </div>
+                </div>
+
+                <!-- Preview Side -->
+                <div class="bg-slate-100 rounded-xl p-6 border border-slate-200 flex flex-col">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">RCOB Live Preview</h3>
+                    
+                    <div id="bullet-output" class="flex-grow bg-white p-6 rounded-lg border border-slate-200 text-slate-800 font-serif leading-relaxed italic">
+                        Start typing to see your SOAR bullet take shape...
+                    </div>
+
+                    <div class="mt-6 space-y-3">
+                        <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-[#9d2235] text-white py-3 rounded-lg font-bold hover:bg-[#7d1b2a] transition-all flex items-center justify-center gap-2 opacity-50 cursor-not-allowed" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                            COPY TO RESUME
+                        </button>
+                        <button onclick="resetBuilder()" class="w-full bg-slate-200 text-slate-600 py-2 rounded-lg font-medium hover:bg-slate-300 transition-all text-sm">
+                            RESET BUILDER
+                        </button>
+                    </div>
+                    
+                    <div id="feedback-msg" class="mt-4 text-xs text-center font-medium"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-slate-50 border-t border-slate-200 p-6">
+            <h4 class="text-sm font-bold text-slate-700 mb-2">Example RCOB Standard:</h4>
+            <p class="text-sm text-slate-600 font-serif italic">"Trained <span class="text-blue-600 font-bold">over 15 wait staff</span> <span class="text-purple-600 font-bold">on a monthly basis</span> which <span class="text-green-600 font-bold">increased customer satisfaction and sales of new menu items 3 quarters in a row.</span>"</p>
+        </div>
+    </div>
+
+    <script>
+        const inputs = {
+            s: document.getElementById('input-s'),
+            o: document.getElementById('input-o'),
+            a: document.getElementById('input-a'),
+            r: document.getElementById('input-r')
+        };
+        
+        const steps = [
+            document.getElementById('step-1'),
+            document.getElementById('step-2'),
+            document.getElementById('step-3'),
+            document.getElementById('step-4')
+        ];
+
+        const dots = [
+            document.getElementById('dot-1'),
+            document.getElementById('dot-2'),
+            document.getElementById('dot-3'),
+            document.getElementById('dot-4')
+        ];
+
+        const output = document.getElementById('bullet-output');
+        const copyBtn = document.getElementById('copy-btn');
+        const progressLine = document.getElementById('progress-line');
+
+        function updateUI() {
+            const s = inputs.s.value.trim();
+            const o = inputs.o.value;
+            const a = inputs.a.value.trim();
+            const r = inputs.r.value.trim();
+
+            // Progress Logic
+            let progress = 0;
+            if (s) { progress = 25; steps[1].classList.replace('step-inactive', 'step-active'); setDot(1); }
+            if (o) { progress = 50; steps[2].classList.replace('step-inactive', 'step-active'); setDot(2); }
+            if (a) { progress = 75; steps[3].classList.replace('step-inactive', 'step-active'); setDot(3); }
+            if (r) { progress = 100; setDot(4); }
+
+            progressLine.style.width = (progress - 12.5) + '%';
+            if (progress === 0) progressLine.style.width = '0%';
+
+            // Bullet Construction
+            if (!s && !o && !a && !r) {
+                output.innerText = "Start typing to see your SOAR bullet take shape...";
+                copyBtn.disabled = true;
+                copyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            // Assemble RCOB format: Statement + Amount + Occurrence + Result
+            // Note: RCOB template example uses: [Action] + [Amount] + [Occurrence] + [Result]
+            let bullet = `• `;
+            if (s) bullet += `${s} `;
+            if (a) bullet += `${a} `;
+            if (o) bullet += `${o} `;
+            if (r) bullet += `${r}`;
+
+            output.innerText = bullet;
+
+            // Enable Copy if complete
+            if (s && o && a && r) {
+                copyBtn.disabled = false;
+                copyBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-[#9d2235]');
+                copyBtn.classList.add('bg-[#9d2235]', 'success-pulse');
+            } else {
+                copyBtn.disabled = true;
+                copyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                copyBtn.classList.remove('success-pulse');
+            }
+        }
+
+        function setDot(index) {
+            dots[index].classList.replace('border-slate-200', 'border-[#9d2235]');
+            dots[index].classList.replace('text-slate-400', 'text-white');
+            dots[index].classList.add('bg-[#9d2235]');
+        }
+
+        function resetBuilder() {
+            Object.values(inputs).forEach(input => input.value = '');
+            steps.slice(1).forEach(step => step.classList.replace('step-active', 'step-inactive'));
+            dots.slice(1).forEach(dot => {
+                dot.classList.replace('border-[#9d2235]', 'border-slate-200');
+                dot.classList.replace('text-white', 'text-slate-400');
+                dot.classList.remove('bg-[#9d2235]');
+            });
+            updateUI();
+        }
+
+        function copyToClipboard() {
+            const text = output.innerText;
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            const msg = document.getElementById('feedback-msg');
+            msg.innerText = "✅ Copied to clipboard! Paste this into your resume.";
+            msg.className = "mt-4 text-xs text-center font-bold text-green-600";
+            setTimeout(() => { msg.innerText = ""; }, 3000);
+        }
+
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', updateUI);
+        });
+    </script>
+</body>
+</html>
