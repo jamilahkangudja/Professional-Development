@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Posting | Marketing Coordinator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nace-tag { display: none; }
+        .show-tags .nace-tag { display: inline-flex; }
+        .duty-card:hover { border-color: #6366f1; transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Main Navigation Bar (Simulated) -->
+        <nav class="flex justify-between items-center mb-10">
+            <div class="flex items-center gap-2 font-bold text-2xl text-indigo-900">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <span>GlobalVision</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-semibold text-slate-500">
+                <a href="#" class="hover:text-indigo-600">Careers</a>
+                <a href="#" class="hover:text-indigo-600">About Us</a>
+                <a href="#" class="hover:text-indigo-600">Culture</a>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <header class="bg-white p-8 md:p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 mb-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full -mr-20 -mt-20 z-0"></div>
+            
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Full-Time</span>
+                        <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-nowrap">ATS-Ranked Role</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Marketing Coordinator</h1>
+                    <p class="text-slate-500 mt-4 text-lg flex items-center gap-3">
+                        <i class="fa-solid fa-building"></i> Marketing & Growth Team
+                        <span class="text-slate-300">|</span>
+                        <i class="fa-solid fa-location-dot"></i> Chicago, IL / Hybrid
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center min-w-[200px]">
+                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Annual Salary</p>
+                    <p class="text-3xl font-black text-indigo-900">$58k – $72k</p>
+                    <button class="mt-4 w-full bg-indigo-600 text-white py-3 px-6 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <!-- Left Side: Detailed Content -->
+            <div class="lg:col-span-8 space-y-10">
+                
+                <!-- Responsibilities Section -->
+                <section>
+                    <div class="flex justify-between items-end mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Key Responsibilities</h2>
+                            <p class="text-slate-500">Essential duties performed in this role.</p>
+                        </div>
+                        <button onclick="document.body.classList.toggle('show-tags')" class="text-xs bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-bold hover:bg-slate-300 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Reveal NACE Codes
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- Duty 1 -->
+                        <div class="duty-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center group">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-share-nodes"></i>
+                                </div>
+                                <p class="text-slate-700 leading-relaxed font-medium pt-1">Coordinate and execute social media campaigns to increase brand awareness across multiple platforms.</p>
+                            </div>
+                            <span class="nace-tag bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-black ml-4 shadow-lg shadow-indigo-100">C, TY</span>
+                        </div>
+
+                        <!-- Duty 2 -->
+                        <div class="duty-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center group">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <p class="text-slate-700 leading-relaxed font-medium pt-1">Analyze marketing performance metrics (website traffic, conversion rates) and make data-driven recommendations.</p>
+                            </div>
+                            <span class="nace-tag bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-black ml-4 shadow-lg shadow-indigo-100">CT, TY</span>
+                        </div>
+
+                        <!-- Duty 3 -->
+                        <div class="duty-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center group">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </div>
+                                <p class="text-slate-700 leading-relaxed font-medium pt-1">Collaborate with cross-functional teams and media outlets to secure endorsements and partnerships.</p>
+                            </div>
+                            <span class="nace-tag bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-black ml-4 shadow-lg shadow-indigo-100">T, C</span>
+                        </div>
+
+                        <!-- Duty 4 -->
+                        <div class="duty-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center group">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-pen-nib"></i>
+                                </div>
+                                <p class="text-slate-700 leading-relaxed font-medium pt-1">Assist in the creation of marketing materials such as brochures, presentations, and digital assets.</p>
+                            </div>
+                            <span class="nace-tag bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-black ml-4 shadow-lg shadow-indigo-100">TY, C</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Requirements Section -->
+                <section class="bg-white p-8 md:p-10 rounded-3xl border border-slate-200 shadow-sm">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-8">Candidate Requirements</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <!-- Minimum -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <i class="fa-solid fa-circle-check text-rose-500"></i>
+                                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest">Minimum Qualifications</h3>
+                            </div>
+                            <ul class="space-y-4 text-slate-600 font-medium">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-rose-500 font-bold">•</span>
+                                    Bachelor's degree in Marketing, Communications, or Business.
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-rose-500 font-bold">•</span>
+                                    1+ year of experience managing professional social media or digital content.
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-rose-500 font-bold">•</span>
+                                    Proficiency in Microsoft Excel (Pivot Tables, VLOOKUP) and Google Suite.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Preferred -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <i class="fa-solid fa-star text-emerald-500"></i>
+                                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest">Preferred (Nice-to-Have)</h3>
+                            </div>
+                            <ul class="space-y-4 text-slate-600 font-medium">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-emerald-500 font-bold">★</span>
+                                    Hands-on experience with Adobe Creative Suite (Photoshop/InDesign).
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-emerald-500 font-bold">★</span>
+                                    Foundational knowledge of SEO and Google Ads.
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-emerald-500 font-bold">★</span>
+                                    Experience working in a fast-paced agency or startup environment.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Side: Sticky Info Bar -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <div class="bg-indigo-900 text-white p-8 rounded-3xl shadow-xl sticky top-8">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info text-indigo-300"></i> Why GlobalVision?
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="text-2xl text-indigo-300"><i class="fa-solid fa-rocket"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">Rapid Growth</h4>
+                                <p class="text-indigo-200 text-xs mt-1 leading-relaxed">Join a team that has doubled in size year-over-year. We promote from within.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl text-indigo-300"><i class="fa-solid fa-laptop-house"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">Flexible Hybrid</h4>
+                                <p class="text-indigo-200 text-xs mt-1 leading-relaxed">Work from home Mondays and Fridays. Modern office space downtown for midweek collaboration.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl text-indigo-300"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">L&D Stipend</h4>
+                                <p class="text-indigo-200 text-xs mt-1 leading-relaxed">$2,500 annual budget for certifications and professional development.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-8 border-indigo-800">
+
+                    <div class="bg-indigo-950 p-5 rounded-2xl">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-indigo-400 mb-3">Recruitment Timeline</h4>
+                        <ul class="text-xs space-y-3">
+                            <li class="flex items-center gap-3 text-indigo-200"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span> Application Review (3-5 days)</li>
+                            <li class="flex items-center gap-3 text-indigo-400"><span class="w-2 h-2 bg-slate-700 rounded-full"></span> Screening Call</li>
+                            <li class="flex items-center gap-3 text-indigo-400"><span class="w-2 h-2 bg-slate-700 rounded-full"></span> Panel Interview</li>
+                            <li class="flex items-center gap-3 text-indigo-400"><span class="w-2 h-2 bg-slate-700 rounded-full"></span> Portfolio Review</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Competency Legend Footer -->
+        <footer class="mt-16 bg-white border border-slate-200 p-8 rounded-3xl">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 text-center">
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">C</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Comm.</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">CT</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Crit. Thinking</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">TY</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Technology</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">T</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Teamwork</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">L</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Leadership</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">P</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Profess.</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">EI</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Equity/Incl.</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-indigo-600 font-black text-lg">CD</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Career Dev.</p>
+                </div>
+            </div>
+            <p class="text-center text-xs text-slate-400 mt-6 border-t pt-6">The NACE Competency Legend is provided for classroom analysis only. Competencies represent the "Professional Currency" of 2025-2026.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
