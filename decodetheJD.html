@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoding the Job Description</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .jd-paper { 
+            background: white; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); 
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        .highlight-yellow { background-color: #fef08a; padding: 2px 4px; border-radius: 4px; border: 1px dashed #eab308; }
+        .highlight-blue { background-color: #dbeafe; padding: 2px 4px; border-radius: 4px; border: 1px dashed #3b82f6; }
+        .marker-note { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="mb-12 border-l-8 border-indigo-600 pl-8">
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Decoding the <span class="text-indigo-600">JD.</span></h1>
+            <p class="text-lg text-slate-500 mt-2">Before you write, you must audit. Recruiters hide the "answers" to the test inside the job posting.</p>
+        </header>
+
+        <!-- The Method -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <div class="bg-indigo-600 text-white p-8 rounded-2xl shadow-xl shadow-indigo-200">
+                <h3 class="font-bold text-xl mb-4">Step 1: Identify "Pain Points"</h3>
+                <p class="text-indigo-100 text-sm leading-relaxed">Companies don't hire people just because they have a degree; they hire to solve a problem. Scan the JD for recurring keywords. These are their "Pain Points."</p>
+            </div>
+            <div class="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
+                <h3 class="font-bold text-xl mb-4 text-slate-800">Step 2: The Skill Extraction</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Per UNT Standards, you need to identify <strong>two major skills</strong> from the requirements section. These will become the foundation of your Marketing Paragraph.</p>
+            </div>
+        </div>
+
+        <!-- Interactive JD Section -->
+        <h2 class="text-2xl font-bold text-slate-800 mb-6">Case Study: Decoding a Real Role</h2>
+        
+        <div class="jd-paper rounded-xl p-8 md:p-12 overflow-hidden">
+            <!-- JD Content -->
+            <div class="space-y-6">
+                <div>
+                    <h4 class="text-xs font-black text-indigo-500 uppercase tracking-widest mb-1">Role Title</h4>
+                    <p class="text-xl font-bold">Junior Business Analyst (Entry Level)</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Job Description</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        We are seeking a detail-oriented analyst to join our operations team. You will be responsible for 
+                        <span class="highlight-yellow">interpreting complex data sets</span> to provide actionable insights. The ideal candidate 
+                        <span class="highlight-blue">collaborates effectively with cross-functional teams</span> and can present findings to stakeholders.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Key Requirements</h4>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="text-indigo-500">•</span>
+                            <span>Ability to <span class="highlight-yellow">utilize Excel</span> for budgetary analysis and performance reviews.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-indigo-500">•</span>
+                            <span>Strong <span class="highlight-blue">interpersonal skills</span> with a focus on client satisfaction.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Legend Overlay -->
+            <div class="mt-12 pt-8 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-4 h-4 highlight-yellow border-none"></div>
+                        <span class="marker-note">Skill Option 1: Technical</span>
+                    </div>
+                    <p class="text-xs text-slate-500 italic">"Skill 1: Data Interpretation & Excel Analysis." Evidence needed: A project where you used Excel to solve a problem.</p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-4 h-4 highlight-blue border-none"></div>
+                        <span class="marker-note">Skill Option 2: Soft Skill</span>
+                    </div>
+                    <p class="text-xs text-slate-500 italic">"Skill 2: Collaborative Communication." Evidence needed: A time you worked in a group to meet a stakeholder's needs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-12 bg-slate-900 rounded-2xl p-8 text-center text-white">
+            <h4 class="text-lg font-bold mb-2">Audit Check: Is it on your Resume?</h4>
+            <p class="text-slate-400 text-sm mb-6 max-w-xl mx-auto">The skills you choose for your cover letter <strong>must</strong> already exist on your resume. You are simply expanding on the story behind those bullets.</p>
+            <div class="flex justify-center gap-4">
+                <span class="px-4 py-2 bg-indigo-500 rounded-lg font-bold text-sm">Target Skill</span>
+                <span class="px-4 py-2 border border-slate-700 rounded-lg font-bold text-sm">Your Evidence</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
