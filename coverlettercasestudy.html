@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 3 Case Study: AA Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Courier+Prime&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .document-font { font-family: 'Courier Prime', monospace; }
+        .line-number { color: #cbd5e1; font-size: 0.7rem; padding-right: 10px; user-select: none; }
+    </style>
+</head>
+<body class="bg-slate-50 p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto space-y-10">
+        
+        <!-- Header -->
+        <header class="text-center">
+            <h1 class="text-3xl font-black text-slate-900">Case Study: The AA Application</h1>
+            <p class="text-slate-500 mt-2">Analyze the Job Description and the Draft Letter below before starting the Quiz.</p>
+        </header>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            
+            <!-- COLUMN 1: THE JOB DESCRIPTION -->
+            <section>
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm h-full">
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <h2 class="font-bold text-sm uppercase tracking-widest">Document A: Job Posting</h2>
+                        <span class="text-[10px] bg-indigo-500 px-2 py-1 rounded">JD #8821</span>
+                    </div>
+                    <div class="p-8 space-y-6">
+                        <div>
+                            <h3 class="text-indigo-600 font-bold text-lg">Financial Strategy Intern</h3>
+                            <p class="text-sm text-slate-500">American Airlines - Fort Worth, TX</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-sm text-slate-800 uppercase tracking-tighter">About the Role</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Join our Finance Team to assist in high-level budgetary analysis. We need a candidate who can 
+                                <span class="bg-yellow-100 font-semibold px-1 text-slate-900">leverage Excel to perform complex financial modeling</span> 
+                                and assist in performance reviews.
+                            </p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-sm text-slate-800 uppercase tracking-tighter">Key Qualifications</h4>
+                            <ul class="text-sm text-slate-600 space-y-2">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 font-bold">•</span>
+                                    <span>Must demonstrate <span class="bg-blue-100 font-semibold px-1 text-slate-900">Cross-Functional Collaboration</span> to work with diverse airline departments.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 font-bold">•</span>
+                                    <span>Detail-oriented mindset for data integrity.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 font-bold">•</span>
+                                    <span>Excellent written communication skills.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLUMN 2: THE STUDENT DRAFT -->
+            <section>
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm h-full">
+                    <div class="bg-indigo-700 text-white px-6 py-4">
+                        <h2 class="font-bold text-sm uppercase tracking-widest">Document B: Student Draft</h2>
+                    </div>
+                    <div class="p-8 document-font text-sm text-slate-800 leading-relaxed">
+                        <div class="flex">
+                            <span class="line-number">01</span>
+                            <div><strong>Ryan Eagle</strong></div>
+                        </div>
+                        <div class="flex"><span class="line-number">02</span><div>Denton, TX | eaglejob@gmail.com</div></div>
+                        <div class="flex mb-6"><span class="line-number">03</span><div>Dec. 23, 2024</div></div>
+
+                        <div class="flex"><span class="line-number">04</span><div>American Airlines Finance Team</div></div>
+                        <div class="flex mb-6"><span class="line-number">05</span><div>4333 Amon Carter Blvd, Fort Worth, TX</div></div>
+
+                        <div class="flex mb-4"><span class="line-number">06</span><div>Dear Hiring Team,</div></div>
+
+                        <div class="flex mb-4">
+                            <span class="line-number">07</span>
+                            <div>I am applying for the Financial Strategy Intern job. I am a team player and a very hard worker. I am currently a student at UNT studying Audit and Assurance. I have always wanted to work for a big company like yours.</div>
+                        </div>
+
+                        <div class="flex mb-4">
+                            <span class="line-number">08</span>
+                            <div>As you can see on my resume, I have used Excel before. In my last class, I performed a budgetary analysis which helped me understand data. I also have great communication skills which will help me collaborate.</div>
+                        </div>
+
+                        <div class="flex mb-4">
+                            <span class="line-number">09</span>
+                            <div>I am a quick learner and very motivated. I believe I have the qualifications you are looking for in a candidate.</div>
+                        </div>
+
+                        <div class="flex mb-4">
+                            <span class="line-number">10</span>
+                            <div>I look forward to hearing from you. If you have any questions, feel free to email me. Thank you for your time.</div>
+                        </div>
+
+                        <div class="flex mt-8"><span class="line-number">11</span><div>Sincerely,</div></div>
+                        <div class="flex mt-4"><span class="line-number">12</span><div>Ryan Eagle</div></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footnote -->
+        <div class="bg-slate-900 text-slate-400 p-6 rounded-xl text-center text-xs uppercase tracking-[0.2em]">
+            Compare the highlighted JD skills to the claims made in Document B.
+        </div>
+
+    </div>
+
+</body>
+</html>
