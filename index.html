@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instructional Design & Program Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f3f6fb;
+      color: #1f2933;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: #4b5563;
+      margin-bottom: 48px;
+      font-style: italic;
+      max-width: 720px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #2a4d69;
+    }
+
+    /* Portfolio grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 24px;
+    }
+
+    .portfolio-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-left: 6px solid #2a4d69;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .portfolio-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #2a4d69;
+    }
+
+    .portfolio-card p {
+      margin: 0;
+      color: #4b5563;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      background-color: #e5edf5;
+      color: #2a4d69;
+      font-weight: 600;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <h1>Instructional Design & Program Portfolio</h1>
+    <p class="subtitle">
+      A curated portfolio showcasing modular course design, program development,
+      and AI-supported instructional tools created for student-facing learning
+      environments in higher education.
+    </p>
+
+    <!-- Featured Work / Navigation -->
+    <div class="card">
+      <h2>Featured Work</h2>
+
+      <div class="portfolio-grid">
+
+        <!-- BUSI 1200 Card -->
+        <a class="portfolio-card" href="busi1200-case-study.html">
+          <h3>BUSI 1200: Careers & Professional Development</h3>
+          <p>
+            Instructional design case study highlighting an 8-week, Canvas-based
+            course focused on career readiness, reflection, and skill articulation
+            for first-year business students.
+          </p>
+          <span class="tag">Instructional Design Case</span>
+        </a>
+
+        <!-- First in Business Card -->
+        <a class="portfolio-card" href="#">
+          <h3>First in Business Program</h3>
+          <p>
+            Cohort-based program design supporting first-generation business
+            students through leadership development, structured engagement,
+            and multi-year learning pathways.
+          </p>
+          <span class="tag">Program Design • Coming Soon</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Design Philosophy -->
+    <div class="card">
+      <h2>Design Approach</h2>
+      <p>
+        My work is grounded in modular learning design, clarity of structure,
+        and accessibility for students with varied levels of academic and
+        professional preparedness. I prioritize practice-based learning,
+        guided reflection, and iterative improvement informed by student
+        engagement and feedback.
+      </p>
+      <ul>
+        <li>Canvas-native, modular page design</li>
+        <li>Scaffolded assignments and clear progression</li>
+        <li>Low-stakes practice with meaningful reflection</li>
+        <li>Intentional, ethical use of AI to support learning outcomes</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
