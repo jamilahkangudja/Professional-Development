@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Occupational Outlook Handbook Simulation : U.S. Bureau of Labor Statistics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Recreating the BLS Color Palette and Typography */
+        :root {
+            --bls-blue: #003366;
+            --bls-light-blue: #e7f2f7;
+            --bls-border: #cccccc;
+            --bls-header-bg: #f1f1f1;
+        }
+        body { font-family: Arial, Helvetica, sans-serif; background-color: #fff; margin: 0; padding: 0; }
+        .bls-header { background-color: var(--bls-blue); color: white; padding: 10px 20px; }
+        .bls-nav { background-color: #333; color: white; padding: 5px 20px; font-size: 14px; }
+        .ooh-tabs { display: flex; border-bottom: 3px solid var(--bls-blue); margin-top: 20px; background: #eee; }
+        .ooh-tab { padding: 10px 15px; border: 1px solid var(--bls-border); border-bottom: none; background: #f9f9f9; cursor: pointer; font-weight: bold; font-size: 13px; color: var(--bls-blue); }
+        .ooh-tab.active { background: var(--bls-blue); color: white; }
+        .quickfacts-box { border: 1px solid var(--bls-blue); margin: 20px 0; display: table; width: 100%; border-collapse: collapse; }
+        .quickfacts-row { display: table-row; border-bottom: 1px solid #ddd; }
+        .quickfacts-label { display: table-cell; background: var(--bls-light-blue); padding: 10px; font-weight: bold; width: 40%; border-right: 1px solid var(--bls-blue); }
+        .quickfacts-value { display: table-cell; padding: 10px; }
+        
+        /* Navigator Sidebar Styles */
+        .navigator-sidebar { background: #f0f4f8; border-left: 4px solid #2563eb; height: 100vh; overflow-y: auto; }
+        .highlight-zone { border: 2px dashed #2563eb; position: relative; }
+        .instruction-tag { background: #2563eb; color: white; font-size: 11px; padding: 2px 6px; position: absolute; top: -10px; left: 10px; font-weight: bold; text-transform: uppercase; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row">
+
+    <!-- LEFT: THE STRATEGIC NAVIGATOR (Your Guidance) -->
+    <aside class="navigator-sidebar w-full md:w-80 p-6 shadow-xl z-50">
+        <div class="flex items-center gap-2 mb-6">
+            <i class="fa-solid fa-compass text-blue-600 text-2xl"></i>
+            <h2 class="font-bold text-slate-800 text-lg uppercase tracking-tight">Strategic Navigator</h2>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                <h3 class="font-bold text-blue-800 text-sm mb-2 uppercase">Step 1: The Quick Facts</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Look at the **Median Pay**. Does this align with the lifestyle goals you set in your Briefing? Remember, this is the 50th percentile—top earners in marketing often double this.
+                </p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                <h3 class="font-bold text-blue-800 text-sm mb-2 uppercase">Step 2: Education Gap</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Verify the **Entry-Level Education**. Notice it says "Bachelor's." This confirms your degree is a *ticket to play*, but the "Hot Tech" we found on O*NET is the *ticket to win*.
+                </p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                <h3 class="font-bold text-blue-800 text-sm mb-2 uppercase">Step 3: Future Proofing</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Check the **Job Outlook**. Anything above 4% is considered healthy. At 8%, this field is growing "Faster than Average." This is where you find career security.
+                </p>
+            </div>
+
+            <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <h3 class="font-bold text-blue-900 text-[10px] uppercase mb-1">Pro Tip</h3>
+                <p class="text-[10px] text-blue-800 leading-tight">
+                    Use the tabs above the data table to explore specific work environments and detailed pay breakdowns by industry.
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- RIGHT: THE BLS SIMULATION -->
+    <main class="flex-1 overflow-y-auto h-screen bg-white">
+        <!-- BLS Top Banner -->
+        <div class="bls-header flex justify-between items-center">
+            <div class="text-xl font-bold italic">U.S. BUREAU OF LABOR STATISTICS</div>
+            <div class="text-xs">Follow Us | Release Calendar | Blog</div>
+        </div>
+        <div class="bls-nav flex justify-between">
+            <div>Home | Subjects | Data Tools | Publications | Economic Releases | Students</div>
+            <div class="bg-white text-black px-2 py-0 text-xs">Search BLS.gov...</div>
+        </div>
+
+        <!-- OOH Content Area -->
+        <div class="px-8 py-6 max-w-4xl">
+            <nav class="text-xs text-blue-700 mb-4">
+                Occupational Outlook Handbook > Management > Advertising, Promotions, and Marketing Managers
+            </nav>
+
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">Advertising, Promotions, and Marketing Managers</h1>
+            
+            <!-- OOH Simulated Tabs -->
+            <div class="ooh-tabs">
+                <div class="ooh-tab active">Summary</div>
+                <div class="ooh-tab">What They Do</div>
+                <div class="ooh-tab">Work Environment</div>
+                <div class="ooh-tab">How to Become One</div>
+                <div class="ooh-tab">Pay</div>
+                <div class="ooh-tab">Job Outlook</div>
+                <div class="ooh-tab">State & Area Data</div>
+            </div>
+
+            <!-- Summary Content -->
+            <div class="border border-t-0 p-6 border-slate-300">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="flex-1">
+                        <div class="highlight-zone">
+                            <span class="instruction-tag">Critical Data Point</span>
+                            <div class="quickfacts-box">
+                                <div class="quickfacts-row">
+                                    <div class="quickfacts-label">2023 Median Pay</div>
+                                    <div class="quickfacts-value font-bold text-green-800">$145,080 per year <br><span class="text-xs font-normal text-slate-500">$69.75 per hour</span></div>
+                                </div>
+                                <div class="quickfacts-row">
+                                    <div class="quickfacts-label">Typical Entry-Level Education</div>
+                                    <div class="quickfacts-value underline text-blue-800">Bachelor's degree</div>
+                                </div>
+                                <div class="quickfacts-row">
+                                    <div class="quickfacts-label">Work Experience in a Related Occupation</div>
+                                    <div class="quickfacts-value">Less than 5 years</div>
+                                </div>
+                                <div class="quickfacts-row">
+                                    <div class="quickfacts-label">On-the-job Training</div>
+                                    <div class="quickfacts-value">None</div>
+                                </div>
+                                <div class="quickfacts-row">
+                                    <div class="quickfacts-label">Number of Jobs, 2023</div>
+                                    <div class="quickfacts-value">399,800</div>
+                                </div>
+                                <div class="quickfacts-row">
+                                    <div class="quickfacts-label">Job Outlook, 2023-33</div>
+                                    <div class="quickfacts-value font-bold text-blue-800">8% (Faster than average)</div>
+                                </div>
+                                <div class="quickfacts-row" style="border-bottom: none;">
+                                    <div class="quickfacts-label">Employment Change, 2023-33</div>
+                                    <div class="quickfacts-value">32,800</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-blue-900 border-b border-blue-900 mb-4 mt-8">What Advertising, Promotions, and Marketing Managers Do</h2>
+                        <p class="text-sm leading-relaxed text-slate-700">
+                            Advertising, promotions, and marketing managers plan programs to generate interest in products or services. They work with art directors, sales agents, and financial staff members.
+                        </p>
+                        <p class="text-sm leading-relaxed text-slate-700 mt-4">
+                            <strong>Marketing managers</strong> estimate the demand for products and services that an organization and its competitors offer. They identify potential markets—for example, business establishments, government agencies, or the general public—and oversee a team that develops strategies to maximize profits and market share.
+                        </p>
+                    </div>
+
+                    <!-- Sidebar Image/Links Simulation -->
+                    <div class="w-full lg:w-64">
+                        <div class="bg-slate-100 p-4 border border-slate-300 rounded mb-4">
+                            <div class="w-full h-40 bg-slate-300 flex items-center justify-center text-slate-500 italic text-center text-xs px-2">
+                                Image Placeholder: Marketing Manager reviewing analytics on a tablet.
+                            </div>
+                        </div>
+                        <div class="text-xs space-y-2">
+                            <div class="font-bold text-blue-900 underline">Related Occupations</div>
+                            <ul class="list-disc pl-4 text-blue-700 space-y-1">
+                                <li>Art Directors</li>
+                                <li>Market Research Analysts</li>
+                                <li>Public Relations Managers</li>
+                                <li>Sales Managers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Meta Simulation -->
+            <div class="mt-8 text-[10px] text-slate-500 border-t pt-4">
+                <strong>Last Modified Date:</strong> August 29, 2024 <br>
+                <strong>Suggested Citation:</strong> Bureau of Labor Statistics, U.S. Department of Labor, Occupational Outlook Handbook, Advertising, Promotions, and Marketing Managers.
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
