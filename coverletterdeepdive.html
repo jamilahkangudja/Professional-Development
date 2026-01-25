@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter Deep Dive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .anatomy-label { position: relative; cursor: help; }
+        .anatomy-label:hover .tooltip { opacity: 1; visibility: visible; }
+        .tooltip { 
+            position: absolute; left: 105%; top: 0; width: 250px; 
+            background: #1e293b; color: white; padding: 12px; 
+            border-radius: 8px; font-size: 0.85rem; z-index: 50;
+            opacity: 0; visibility: hidden; transition: all 0.2s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased pb-20">
+
+    <!-- HERO SECTION -->
+    <header class="bg-white border-b border-slate-200 pt-16 pb-12 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest rounded-full mb-4">
+                Module 3: Professional Persuasion
+            </div>
+            <h1 class="text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
+                The Cover Letter <span class="text-indigo-600">Deep Dive.</span>
+            </h1>
+            <p class="text-xl text-slate-600 font-light leading-relaxed max-w-2xl">
+                If the resume is your factual history, the cover letter is your narrative. It’s the "Why" behind the "What," designed to connect the dots between your past and their future.
+            </p>
+        </div>
+    </header>
+
+    <!-- SECTION 1: STRATEGIC PURPOSE -->
+    <section class="max-w-4xl mx-auto px-6 mt-16">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center mb-4 font-bold text-lg">1</div>
+                <h3 class="font-bold mb-2">Bridge the Gap</h3>
+                <p class="text-sm text-slate-500">It explains how disparate experiences on your resume unite to make you the perfect candidate for <em>this</em> specific role.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center mb-4 font-bold text-lg">2</div>
+                <h3 class="font-bold mb-2">Show Soft Skills</h3>
+                <p class="text-sm text-slate-500">A resume lists skills; a cover letter demonstrates them through storytelling and professional tone.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center mb-4 font-bold text-lg">3</div>
+                <h3 class="font-bold mb-2">Answer Questions</h3>
+                <p class="text-sm text-slate-500">Addressing gaps, relocation, or career pivots happens here, ensuring the recruiter doesn't have to guess.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE VISUAL ANATOMY -->
+    <section class="max-w-4xl mx-auto px-6 mt-24">
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+            <span class="w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm">A</span>
+            Visual Anatomy
+        </h2>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden flex flex-col md:flex-row">
+            <!-- Mock Document -->
+            <div class="flex-1 p-8 md:p-12 bg-white border-r border-slate-100">
+                <div class="text-right text-[10px] text-slate-400 mb-8 font-mono">YOUR CONTACT INFO</div>
+                
+                <div class="h-2 w-24 bg-slate-100 mb-4 rounded"></div>
+                <div class="h-2 w-32 bg-slate-100 mb-12 rounded"></div>
+
+                <!-- Intro -->
+                <div class="anatomy-label group">
+                    <div class="space-y-2 mb-8 bg-indigo-50/50 p-4 rounded-lg border border-indigo-100 transition-all group-hover:bg-indigo-100">
+                        <div class="h-2.5 w-full bg-indigo-300 rounded"></div>
+                        <div class="h-2.5 w-5/6 bg-indigo-300 rounded"></div>
+                        <div class="h-2.5 w-4/6 bg-indigo-300 rounded"></div>
+                    </div>
+                    <div class="tooltip font-sans">
+                        <strong class="text-indigo-400 block mb-1 uppercase tracking-tighter text-xs">Paragraph 1: The Hook</strong>
+                        "This is what I want to do & Why I want to do it with you." Mention the role and your connection to the company.
+                    </div>
+                </div>
+
+                <!-- Marketing -->
+                <div class="anatomy-label group">
+                    <div class="space-y-2 mb-8 bg-emerald-50/50 p-4 rounded-lg border border-emerald-100 transition-all group-hover:bg-emerald-100">
+                        <div class="h-2.5 w-full bg-emerald-300 rounded"></div>
+                        <div class="h-2.5 w-full bg-emerald-300 rounded"></div>
+                        <div class="h-2.5 w-full bg-emerald-300 rounded"></div>
+                        <div class="h-2.5 w-4/5 bg-emerald-300 rounded"></div>
+                    </div>
+                    <div class="tooltip">
+                        <strong class="text-emerald-400 block mb-1 uppercase tracking-tighter text-xs">Paragraph 2: The Marketing</strong>
+                        "This is what I can do for you." Match your degree and skills to the JD using specific evidence.
+                    </div>
+                </div>
+
+                <!-- Closing -->
+                <div class="anatomy-label group">
+                    <div class="space-y-2 mb-8 bg-amber-50/50 p-4 rounded-lg border border-amber-100 transition-all group-hover:bg-amber-100">
+                        <div class="h-2.5 w-full bg-amber-300 rounded"></div>
+                        <div class="h-2.5 w-3/5 bg-amber-300 rounded"></div>
+                    </div>
+                    <div class="tooltip">
+                        <strong class="text-amber-400 block mb-1 uppercase tracking-tighter text-xs">Paragraph 3: The Call to Action</strong>
+                        "I want an interview." State your availability, contact method, and thank them for their time.
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <div class="h-2 w-16 bg-slate-200 mb-2 rounded"></div>
+                    <div class="h-3 w-24 bg-slate-400 rounded"></div>
+                </div>
+            </div>
+
+            <!-- Side Legend -->
+            <div class="w-full md:w-64 bg-slate-50 p-8 border-t md:border-t-0">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Key Standards</h4>
+                <div class="space-y-6">
+                    <div>
+                        <span class="text-xs font-bold text-slate-900 block mb-1">Length</span>
+                        <p class="text-xs text-slate-500">Strictly 1 page. 3 concise paragraphs are ideal.</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-slate-900 block mb-1">Tone</span>
+                        <p class="text-xs text-slate-500">Professional but personal. Limit "I" statements.</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-slate-900 block mb-1">Evidence</span>
+                        <p class="text-xs text-slate-500">Every claim needs a supporting example from your past.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-xs text-slate-400 mt-4 italic italic">Hover over sections to reveal their strategic purpose.</p>
+    </section>
+
+    <!-- SECTION 3: THE UNT CAREER CENTER CHECKLIST -->
+    <section class="max-w-4xl mx-auto px-6 mt-24">
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+            <span class="w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm">B</span>
+            The Quality Checklist
+        </h2>
+        
+        <div class="bg-indigo-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 opacity-10">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-6 relative z-10">
+                <div class="flex gap-4">
+                    <div class="mt-1 text-indigo-400">✔</div>
+                    <div>
+                        <h4 class="font-bold">Avoid Clichés</h4>
+                        <p class="text-sm text-indigo-200">Remove "Team player" or "Highly motivated" unless backed by a specific project result.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="mt-1 text-indigo-400">✔</div>
+                    <div>
+                        <h4 class="font-bold">Name the Source</h4>
+                        <p class="text-sm text-indigo-200">Always mention where you saw the job (e.g., Handshake, Company Website).</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="mt-1 text-indigo-400">✔</div>
+                    <div>
+                        <h4 class="font-bold">Simple Formatting</h4>
+                        <p class="text-sm text-indigo-200">Use standard fonts (10-12pt) and avoid graphics that confuse ATS scanners.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="mt-1 text-indigo-400">✔</div>
+                    <div>
+                        <h4 class="font-bold">No "I" Overload</h4>
+                        <p class="text-sm text-indigo-200">Shift the focus to the employer. Instead of "I did X," try "X was a key achievement that..."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSITION TO DECODING -->
+    <div class="max-w-4xl mx-auto px-6 mt-24 text-center">
+        <div class="h-12 w-px bg-slate-300 mx-auto mb-8"></div>
+        <p class="text-slate-500 mb-8 uppercase tracking-widest text-xs font-bold">Up Next</p>
+        <h3 class="text-3xl font-extrabold mb-4">Ready to Decode?</h3>
+        <p class="text-slate-600 mb-8">Before we write, we must read. Let's look at how to pull requirements from a real job description.</p>
+        <button class="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all">
+            Proceed to Decoding →
+        </button>
+    </div>
+
+</body>
+</html>
