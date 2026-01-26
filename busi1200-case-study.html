@@ -8,51 +8,55 @@
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f3f6fb;
+      font-family: "Georgia", "Times New Roman", serif;
+      background-color: #f4f7fb;
       color: #1f2933;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 48px 24px;
+      padding: 64px 24px;
     }
 
     h1 {
-      font-size: 2.3rem;
-      margin-bottom: 0.25rem;
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      color: #243a5e;
+      font-weight: 600;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: #243a5e;
+      font-weight: 600;
     }
 
     .subtitle {
-      color: #4b5563;
-      margin-bottom: 40px;
+      color: #374151;
+      margin-bottom: 48px;
       font-style: italic;
+      max-width: 760px;
     }
 
     .card {
       background: #ffffff;
-      border-radius: 14px;
-      padding: 28px;
-      margin-bottom: 28px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      color: #2a4d69;
-    }
-
-    ul {
-      padding-left: 20px;
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
     }
 
     .artifact-link {
       display: inline-block;
       margin-top: 16px;
-      padding: 14px 20px;
-      background-color: #2a4d69;
+      padding: 12px 18px;
+      background-color: #243a5e;
       color: #ffffff;
       text-decoration: none;
       border-radius: 10px;
@@ -60,19 +64,22 @@
     }
 
     .artifact-link:hover {
-      background-color: #1e374f;
+      background-color: #1b2d4a;
     }
 
-    details {
-      margin-top: 12px;
+    ul {
+      padding-left: 20px;
     }
 
-    summary {
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      color: #2a4d69;
-      margin-bottom: 12px;
+    .example {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .example:first-of-type {
+      border-top: none;
+      padding-top: 0;
     }
   </style>
 </head>
@@ -81,69 +88,119 @@
   <div class="container">
 
     <h1>BUSI 1200: Careers & Professional Development</h1>
-    <div class="subtitle">Instructional Design Case Study</div>
+    <p class="subtitle">Instructional Design Case Study</p>
 
     <div class="card">
-      <h2>Course Snapshot</h2>
+      <h2>Course Context</h2>
       <p>
         BUSI 1200 is an 8-week, first-year course focused on career readiness,
-        reflection, and professional skill articulation. The course is designed
-        for students with varying levels of academic and professional preparedness,
-        including many first-generation college students.
+        reflection, and professional skill articulation. The course serves students
+        with varied levels of academic and professional preparedness, including
+        many first-generation college students navigating institutional systems
+        and career exploration for the first time.
       </p>
     </div>
 
     <div class="card">
-      <details open>
-        <summary>Instructional Design Approach</summary>
-        <p>
-          Course content is delivered through modular Canvas-based pages that prioritize
-          clarity, structure, and student engagement. Learning experiences are scaffolded
-          to reduce overwhelm and emphasize practice-based learning.
-        </p>
-        <ul>
-          <li>Weekly modular structure</li>
-          <li>Clear prerequisites to unlock content</li>
-          <li>Practice → reflection → feedback loop</li>
-          <li>Low-stakes, high-engagement activities</li>
-        </ul>
-      </details>
-    </div>
-
-    <div class="card">
-      <h2>Featured Instructional Artifact</h2>
+      <h2>Design Challenge & Constraints</h2>
       <p>
-        The linked page below represents a live instructional artifact currently used by
-        students in BUSI 1200. It mirrors the structure of a Canvas module page and includes
-        learning objectives, activities, and guided reflection prompts.
+        The primary design challenge was creating a structured yet flexible learning
+        experience within a compressed 8-week timeline. Students entered the course
+        with wide-ranging familiarity with professional development concepts, making
+        clarity of expectations and cognitive load management essential. The course
+        needed to balance skill development with reflection while maintaining
+        accessibility within a Canvas-based environment.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Instructional Design Approach</h2>
+      <p>
+        Course design centered on modular, Canvas-native pages that emphasized
+        consistency, predictability, and guided progression. Learning experiences
+        were scaffolded to reduce overwhelm and support student confidence through
+        repeated cycles of practice, reflection, and feedback.
+      </p>
+      <ul>
+        <li>Weekly modular structure with clear completion pathways</li>
+        <li>Prerequisite gating to encourage sequential engagement</li>
+        <li>Practice-based activities over passive content consumption</li>
+        <li>Reflection used as both a learning and assessment tool</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Design in Practice: Selected Examples</h2>
+      <p>
+        The following examples highlight how instructional design principles were
+        translated into concrete learning experiences within BUSI 1200. Each example
+        reflects intentional design choices made to support clarity, engagement,
+        and skill articulation.
       </p>
 
-      <a
-        class="artifact-link"
-        href="PASTE-YOUR-LIVE-BUSI1200-LINK-HERE"
-        target="_blank"
-      >
-        View BUSI 1200 Course Page
+      <div class="example">
+        <h3>Design Example: Career Research Module</h3>
+        <p>
+          <strong>Design goal:</strong> Support students in exploring potential
+          career pathways while reducing intimidation associated with labor market
+          data and unfamiliar research tools.
+        </p>
+        <p>
+          <strong>Instructional move:</strong> The module guided students through
+          career research using structured prompts and curated resources, allowing
+          them to focus on interpretation rather than navigation. Scaffolded questions
+          helped students translate research into personal insights.
+        </p>
+        <p>
+          <strong>Why it works:</strong> By breaking research into manageable steps
+          and emphasizing reflection, students were able to engage meaningfully with
+          career information without becoming overwhelmed.
+        </p>
+      </div>
+
+      <div class="example">
+        <h3>Design Example: Resume Court</h3>
+        <p>
+          <strong>Design goal:</strong> Encourage students to critically evaluate
+          resumes and articulate professional strengths without the pressure of
+          immediate self-presentation.
+        </p>
+        <p>
+          <strong>Instructional move:</strong> Students analyzed sample resumes
+          through guided criteria, shifting focus from personal performance to
+          skill recognition and constructive critique.
+        </p>
+        <p>
+          <strong>Why it works:</strong> This approach lowered affective barriers and
+          helped students develop evaluative skills that later supported their own
+          resume development.
+        </p>
+      </div>
+
+      <a class="artifact-link" href="PASTE-YOUR-LIVE-BUSI1200-LINK-HERE" target="_blank">
+        View Live BUSI 1200 Course Page
       </a>
     </div>
 
     <div class="card">
-      <h2>Use of AI in Content Development</h2>
+      <h2>Use of AI in Instructional Design</h2>
       <p>
-        AI tools were used to support instructional design by prototyping content,
-        generating examples, and refining language for clarity and accessibility.
-        All AI-assisted outputs were reviewed, edited, and aligned to course learning
-        objectives by the instructor.
+        AI tools were used as a support for instructional design by assisting with
+        the drafting of instructional language, generating example scenarios, and
+        refining clarity. All AI-assisted content was reviewed and aligned with
+        learning objectives, ensuring that pedagogy—not automation—guided design
+        decisions.
       </p>
     </div>
 
     <div class="card">
       <h2>Reflection & Iteration</h2>
       <p>
-        Course design decisions were refined over time based on student engagement,
-        feedback, and observed areas of confusion. Emphasis on modular structure and
-        guided reflection helped students better articulate skills and career interests.
-        Future iterations will continue to balance structure with flexibility.
+        Throughout the course, design decisions were refined in response to student
+        engagement patterns and feedback. Observations of student confusion or
+        overload informed adjustments to instructional language and pacing. Future
+        iterations will continue to refine the balance between structure and
+        flexibility as student needs evolve.
       </p>
     </div>
 
