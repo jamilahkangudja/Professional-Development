@@ -2,97 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Instructional Design & Program Portfolio</title>
+  <title>Teaching, Instructional Design, & Program Practice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f3f6fb;
+      font-family: "Georgia", "Times New Roman", serif;
+      background-color: #f4f7fb;
       color: #1f2933;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 56px 24px;
+      padding: 64px 24px;
     }
 
     h1 {
-      font-size: 2.4rem;
-      margin-bottom: 0.25rem;
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      color: #243a5e;
+      font-weight: 600;
+    }
+
+    h3 {
+      color: #243a5e;
+      font-weight: 600;
     }
 
     .subtitle {
-      color: #4b5563;
-      margin-bottom: 48px;
+      color: #374151;
+      max-width: 760px;
+      margin-bottom: 56px;
       font-style: italic;
-      max-width: 720px;
     }
 
     .card {
       background: #ffffff;
-      border-radius: 14px;
-      padding: 32px;
-      margin-bottom: 36px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
     }
 
-    .card h2 {
-      margin-top: 0;
-      color: #2a4d69;
-    }
-
-    /* Portfolio grid */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-      margin-top: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 32px;
     }
 
     .portfolio-card {
       background: #ffffff;
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      border-left: 6px solid #2a4d69;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border-top: 8px solid #243a5e;
     }
 
     .portfolio-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
-    }
-
-    .portfolio-card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-      color: #2a4d69;
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.08);
     }
 
     .portfolio-card p {
-      margin: 0;
-      color: #4b5563;
+      color: #374151;
     }
 
-    .tag {
+    .case-label {
       display: inline-block;
-      margin-top: 12px;
-      padding: 4px 10px;
+      margin-top: 16px;
+      padding: 6px 14px;
       font-size: 0.8rem;
-      border-radius: 20px;
-      background-color: #e5edf5;
-      color: #2a4d69;
+      border-radius: 999px;
+      background-color: #e8eef7;
+      color: #243a5e;
       font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
     ul {
       padding-left: 20px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 48px 0;
     }
   </style>
 </head>
@@ -100,60 +105,76 @@
 <body>
   <div class="container">
 
-    <!-- Header -->
-    <h1>Instructional Design & Program Portfolio</h1>
+    <h1>Teaching, Instructional Design, & Program Practice</h1>
     <p class="subtitle">
-      A curated portfolio showcasing modular course design, program development,
-      and AI-supported instructional tools created for student-facing learning
-      environments in higher education.
+      This portfolio documents my approach to course design, program development,
+      and student-centered learning in higher education. The work presented here
+      reflects an emphasis on modular structure, reflective practice, and the
+      intentional use of emerging tools to support learning outcomes.
     </p>
 
-    <!-- Featured Work / Navigation -->
     <div class="card">
-      <h2>Featured Work</h2>
+      <h2>About My Practice</h2>
+      <p>
+        My work sits at the intersection of teaching, instructional design, and
+        program development. I design learning experiences for students who are
+        navigating higher education with varied levels of academic preparation,
+        professional exposure, and institutional familiarity—many of whom are
+        first-generation college students.
+      </p>
+      <p>
+        Across my work, I prioritize clarity of structure, intentional scaffolding,
+        and reflection as a tool for meaning-making. I approach design as an
+        iterative process, refining content and learning pathways based on student
+        engagement, feedback, and observed needs.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Selected Case Studies & Program Work</h2>
 
       <div class="portfolio-grid">
 
-        <!-- BUSI 1200 Card -->
         <a class="portfolio-card" href="busi1200-case-study.html">
           <h3>BUSI 1200: Careers & Professional Development</h3>
           <p>
-            Instructional design case study highlighting an 8-week, Canvas-based
-            course focused on career readiness, reflection, and skill articulation
-            for first-year business students.
+            An instructional design case study examining the development of an
+            8-week, Canvas-based course for first-year business students. The course
+            emphasizes career readiness, guided reflection, and skill articulation
+            through scaffolded, practice-based learning experiences.
           </p>
-          <span class="tag">Instructional Design Case</span>
+          <span class="case-label">Course Design Case</span>
         </a>
 
-        <!-- First in Business Card -->
         <a class="portfolio-card" href="#">
           <h3>First in Business Program</h3>
           <p>
-            Cohort-based program design supporting first-generation business
-            students through leadership development, structured engagement,
-            and multi-year learning pathways.
+            A cohort-based, multi-year program supporting first-generation business
+            students through leadership development, community-building, and
+            structured engagement. This case will explore program architecture,
+            learning pathways, and student leadership models.
           </p>
-          <span class="tag">Program Design • Coming Soon</span>
+          <span class="case-label">Program Design • In Progress</span>
         </a>
 
       </div>
     </div>
 
-    <!-- Design Philosophy -->
+    <div class="divider"></div>
+
     <div class="card">
-      <h2>Design Approach</h2>
+      <h2>Pedagogical & Design Orientation</h2>
       <p>
-        My work is grounded in modular learning design, clarity of structure,
-        and accessibility for students with varied levels of academic and
-        professional preparedness. I prioritize practice-based learning,
-        guided reflection, and iterative improvement informed by student
-        engagement and feedback.
+        My design practice is grounded in clarity, structure, and accessibility for
+        students with varied levels of academic and professional preparedness. I view
+        instructional design as an iterative process—one that balances intentional
+        scaffolding with opportunities for exploration, reflection, and growth.
       </p>
       <ul>
-        <li>Canvas-native, modular page design</li>
-        <li>Scaffolded assignments and clear progression</li>
-        <li>Low-stakes practice with meaningful reflection</li>
-        <li>Intentional, ethical use of AI to support learning outcomes</li>
+        <li>Modular, Canvas-native course design</li>
+        <li>Scaffolded learning experiences that reduce cognitive overload</li>
+        <li>Reflection as a tool for meaning-making and skill articulation</li>
+        <li>Ethical, transparent use of AI to support—not replace—instruction</li>
       </ul>
     </div>
 
