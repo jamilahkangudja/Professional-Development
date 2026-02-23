@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy: Interview Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .cat-header { font-family: 'Montserrat', sans-serif; background-color: #fbbf24; color: #0f172a; }
+        
+        .jeopardy-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+        }
+
+        .tile {
+            aspect-ratio: 16 / 10;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .tile-inner {
+            width: 100%; height: 100%;
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; font-weight: 800; color: #fbbf24;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .tile:hover .tile-inner { background-color: #334155; border-color: #fbbf24; transform: scale(1.02); }
+        .tile.visited .tile-inner { background-color: #020617; color: #475569; border-color: #1e293b; transform: none; }
+
+        .modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(2, 6, 17, 0.98);
+            z-index: 50; padding: 2rem;
+            align-items: center; justify-content: center;
+        }
+
+        .modal.active { display: flex; }
+        #answer-text { visibility: hidden; opacity: 0; transition: opacity 0.3s; }
+        #answer-text.revealed { visibility: visible; opacity: 1; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-black text-fbbf24 uppercase tracking-tighter">Interview Mastery</h1>
+            <p class="text-slate-400 text-lg">Classroom Challenge</p>
+        </header>
+
+        <div class="jeopardy-grid mb-8">
+            <!-- Headers -->
+            <div class="cat-header p-3 text-center font-bold uppercase rounded-t-lg text-[10px] md:text-xs">The READ Audit</div>
+            <div class="cat-header p-3 text-center font-bold uppercase rounded-t-lg text-[10px] md:text-xs">The Progression</div>
+            <div class="cat-header p-3 text-center font-bold uppercase rounded-t-lg text-[10px] md:text-xs">Building Trust</div>
+            <div class="cat-header p-3 text-center font-bold uppercase rounded-t-lg text-[10px] md:text-xs">Interview Styles</div>
+            <div class="cat-header p-3 text-center font-bold uppercase rounded-t-lg text-[10px] md:text-xs">The 3 Pillars</div>
+
+            <!-- Row 1 -->
+            <div class="tile" onclick="openModal('READ', 100, 'This letter instructs you to read the entire posting from top to bottom exactly 3 times.', 'What is Review (R)?')">
+                <div class="tile-inner">$100</div>
+            </div>
+            <div class="tile" onclick="openModal('PROG', 100, 'In Round 1, the employer is performing a Qualification and this type of check.', 'What is a Communication Check?')">
+                <div class="tile-inner">$100</div>
+            </div>
+            <div class="tile" onclick="openModal('TRUST', 100, 'In the Trust Workflow, every interview starts at this state of mind for the employer.', 'What is Uncertainty?')">
+                <div class="tile-inner">$100</div>
+            </div>
+            <div class="tile" onclick="openModal('STYLE', 100, 'This traditional style involves a 1-on-1 meeting where the candidate answers a series of questions.', 'What is the Standard Interview?')">
+                <div class="tile-inner">$100</div>
+            </div>
+            <div class="tile" onclick="openModal('PILLAR', 100, 'This pillar evaluates if you actually have the technical skills and knowledge to do the job.', 'What is Competence?')">
+                <div class="tile-inner">$100</div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="tile" onclick="openModal('READ', 200, 'This step requires you to spot and highlight repeated keywords and phrases throughout the post.', 'What is Emphasize (E)?')">
+                <div class="tile-inner">$200</div>
+            </div>
+            <div class="tile" onclick="openModal('PROG', 200, 'Round 2 is described as a Deep Dive into these two specific areas.', 'What are Competence and Specifics?')">
+                <div class="tile-inner">$200</div>
+            </div>
+            <div class="tile" onclick="openModal('TRUST', 200, 'According to the workflow, providing this to the employer leads directly to Clarity.', 'What is Structure?')">
+                <div class="tile-inner">$200</div>
+            </div>
+            <div class="tile" onclick="openModal('STYLE', 200, 'This style tests how you react to difficult or unexpected scenarios to gauge your problem-solving skills.', 'What is the Behavioral Interview?')">
+                <div class="tile-inner">$200</div>
+            </div>
+            <div class="tile" onclick="openModal('PILLAR', 200, 'This pillar focuses on your ability to articulate complex ideas clearly to different stakeholders.', 'What is Communication?')">
+                <div class="tile-inner">$200</div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="tile" onclick="openModal('READ', 300, 'In this stage of the audit, you separate what is Required from what is merely Preferred.', 'What is Assess (A)?')">
+                <div class="tile-inner">$300</div>
+            </div>
+            <div class="tile" onclick="openModal('PROG', 300, 'The Final Round is focused on Team Culture Alignment and this critical business goal.', 'What is Risk Reduction?')">
+                <div class="tile-inner">$300</div>
+            </div>
+            <div class="tile" onclick="openModal('TRUST', 300, 'Once you establish Clarity and Trust, the final result for the employer is this.', 'What is Reduced Risk?')">
+                <div class="tile-inner">$300</div>
+            </div>
+            <div class="tile" onclick="openModal('STYLE', 300, 'Often used for PM roles, this style requires the candidate to solve a specific business problem on the spot.', 'What is the Case Interview?')">
+                <div class="tile-inner">$300</div>
+            </div>
+            <div class="tile" onclick="openModal('PILLAR', 300, 'The final pillar that measures how you handle pressure and maintain professionalism during the interview.', 'What is Composure?')">
+                <div class="tile-inner">$300</div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="tile" onclick="openModal('READ', 400, 'The final letter of the audit where you figure out the employer\'s top priorities and instructions.', 'What is Determine (D)?')">
+                <div class="tile-inner">$400</div>
+            </div>
+            <div class="tile" onclick="openModal('PROG', 400, 'According to the Progression slide, this is the number of main rounds usually found in the process.', 'What is Three (3)?')">
+                <div class="tile-inner">$400</div>
+            </div>
+            <div class="tile" onclick="openModal('TRUST', 400, 'Between Clarity and Reduced Risk, this emotional state must be built through your performance.', 'What is Trust?')">
+                <div class="tile-inner">$400</div>
+            </div>
+            <div class="tile" onclick="openModal('STYLE', 400, 'This high-pressure style involves multiple interviewers asking questions to a single candidate at once.', 'What is the Panel Interview?')">
+                <div class="tile-inner">$400</div>
+            </div>
+            <div class="tile" onclick="openModal('PILLAR', 400, 'In the Final Round, when skills are equal, these two pillars usually determine the winner.', 'What are Communication and Composure?')">
+                <div class="tile-inner">$400</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="game-modal" class="modal" onclick="handleModalClick(event)">
+        <div class="modal-content p-10 bg-slate-900 border-4 border-fbbf24 rounded-2xl text-center shadow-2xl">
+            <h3 id="modal-category" class="text-fbbf24 uppercase font-bold text-xl mb-4"></h3>
+            <div id="question-text" class="text-3xl md:text-4xl font-bold mb-10 text-white leading-tight"></div>
+            <div id="answer-text" class="text-3xl text-emerald-400 font-bold uppercase p-6 bg-emerald-400/10 rounded-lg border border-emerald-400/20"></div>
+            <p id="instruction" class="mt-8 text-slate-500 uppercase text-sm font-bold animate-pulse">Click to reveal answer</p>
+        </div>
+    </div>
+
+    <script>
+        let currentTile = null;
+        function openModal(cat, pts, q, a) {
+            document.getElementById('modal-category').innerText = cat + " - $" + pts;
+            document.getElementById('question-text').innerText = q;
+            document.getElementById('answer-text').innerText = a;
+            document.getElementById('answer-text').classList.remove('revealed');
+            document.getElementById('instruction').innerText = "Click to reveal answer";
+            document.getElementById('game-modal').classList.add('active');
+            currentTile = event.currentTarget;
+        }
+        function handleModalClick() {
+            const a = document.getElementById('answer-text');
+            if (!a.classList.contains('revealed')) {
+                a.classList.add('revealed');
+                document.getElementById('instruction').innerText = "Click to close";
+            } else {
+                document.getElementById('game-modal').classList.remove('active');
+                if (currentTile) currentTile.classList.add('visited');
+            }
+        }
+    </script>
+</body>
+</html>
